@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.status(404).send('WhooOoooOps something went trong!');
+  res.status(404).send('Whoops something went wrong!');
 });
 
 let server;
@@ -48,11 +48,11 @@ function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((res, rej) => {
       console.log('Closing server.');
-      server.close(err => {
+      server.close((err) => {
         if (err) {
           return rej(err);
         }
-        res();
+        return res();
       });
     });
   });
@@ -62,4 +62,4 @@ if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.log(err));
 }
 
-module.exports = {app, runServer, closeServer};
+module.exports = { app, runServer, closeServer };
