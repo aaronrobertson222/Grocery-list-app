@@ -1,90 +1,160 @@
-var path = require('path');
-var webpack = require('webpack');
+const webpack = require('webpack');
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
 
-var isProduction = process.env.NODE_ENV === 'production' || false;
-var isDevelopment = process.env.NODE_ENV === 'development' || false;
-var isTesting = process.env.NODE_ENV === 'testing' || false;
+const nodeEnv = process.env.NODE_ENV || 'development';
+const isProduction = nodeEnv === 'development';
 
-var imgPath = path.join(__dirname, './src/assets/images')
+const buildPath = path.join(__dirname, './build/');
+const srcPath = path.join(__dirname, './src/');
+const imgPath = path.join(__dirname, './src/assets/images/');
 
-var app = [
-  './src/index.jsx',
-  './src/index.html',
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+
+const plugins = [
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify(nodeEnv),
+    },
+  }),
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+    filename: 'vendor-[hash].js',
+    minChunks(module) {
+      const context = module.context;
+      return context && context.indexOf('node_modules') >= 0;
+    },
+  }),
+  new webpack.NamedModulesPlugin(),
+  new HtmlWebpackPlugin({
+    template: path.join(srcPath, 'index.html'),
+    path: buildPath,
+    filename: 'index.html',
+  }),
+  new webpack.LoaderOptionsPlugin({
+    options: {
+      postcss: [
+        autoprefixer({
+          browsers: [
+            'last 3 version',
+            'ie >= 10',
+          ],
+        }),
+      ],
+      context: srcPath,
+    },
+  }),
 ];
 
-var vendor = [
-  'react',
-  'react-dom',
-];
-
-var plugins = [
-    new webpack.DefinePlugin({
-        'process.env':  {
-          'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-        },
-    }),
+const rules = [
+  {
+    test: /\.(js|jsx)$/,
+    exclude: /node_modules/,
+    use: [
+      'babel-loader',
+      'eslint-loader',
+    ],
+  },
+  {
+    test: /\.(png|gif|jpg|svg)$/,
+    include: imgPath,
+    use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]',
+  },
 ];
 
 if (isProduction) {
-  // production plugins
   plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        output: {
-          comments: false,
-        },
-      },
-    }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
-    new ExtractTextPlugin('styles.css')
-  )
+   new webpack.optimize.UglifyJsPlugin({
+     compress: {
+       warnings: false,
+       screw_ie8: true,
+       conditionals: true,
+       unused: true,
+       comparisons: true,
+       sequences: true,
+       dead_code: true,
+       evaluate: true,
+       if_return: true,
+       join_vars: true,
+     },
+     output: {
+       comments: false,
+     },
+   }),
+   new ExtractTextPlugin('style-[hash].css')
+ );
+
+ rules.push(
+   {
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: 'css-loader',
+      }),
+    }
+ );
+} else {
+  plugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new DashboardPlugin()
+  );
+
+  rules.push(
+    {
+    test: /\.css$/,
+      exclude: /node_modules/,
+      use: [
+        'style-loader',
+        'css-loader',
+      ],
+    }
+  );
 }
 
 module.exports = {
-  entry: './src/index.jsx',
+  entry: {
+    js: 'index.js',
+  },
+  context: srcPath,
   plugins,
   module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: [
-          'babel-loader',
-      ],
-      },
-      {
-        test: /\.(png|gif|jpg|svg)$/,
-        include: imgPath,
-        use: isTesting ? 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]'
-      },
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader',
-        })
-      }
+    rules,
+  },
+  resolve: {
+    extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx', '.css'],
+    modules: [
+      path.resolve(__dirname, 'node_modules'),
+      srcPath,
     ],
   },
   output: {
-    path: __dirname + '/public',
-    publicPath: '',
-    filename: 'bundle.js'
+    path: buildPath,
+    publicPath: '/',
+    filename: '[name]-[hash].js',
   },
+  devtool: isProduction ? false : 'source-map',
   devServer: {
-    contentBase: path.join(__dirname, "public"),
+    contentBase: isProduction ? buildPath : srcPath,
+    historyApiFallback: true,
     port: 3000,
     compress: isProduction,
     inline: !isProduction,
     hot: !isProduction,
     stats: {
       assets: true,
-      cached: true,
+      children: false,
+      chunks: false,
+      hash: false,
+      modules: false,
+      publicPath: false,
       timings: true,
+      version: false,
       warnings: true,
+      colors: {
+        green: '\u001b[32m',
+      },
     },
-  }
-};
+  },
+}
