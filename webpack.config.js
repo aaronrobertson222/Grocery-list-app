@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
-const isProduction = nodeEnv === 'development';
+const isProduction = nodeEnv !== 'development';
 
 const buildPath = path.join(__dirname, './build/');
 const srcPath = path.join(__dirname, './src/');
@@ -88,27 +88,25 @@ if (isProduction) {
 
  rules.push(
    {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: 'css-loader',
-      }),
-    }
+    test: /\.css$/,
+    loaders: [
+        'style-loader?sourceMap',
+        'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+    ]
+  }
  );
 } else {
   plugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new DashboardPlugin()
+    new webpack.HotModuleReplacementPlugin()
   );
 
   rules.push(
     {
-    test: /\.css$/,
-      exclude: /node_modules/,
-      use: [
-        'style-loader',
-        'css-loader',
-      ],
+      test: /\.css$/,
+      loaders: [
+          'style-loader?sourceMap',
+          'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+      ]
     }
   );
 }
