@@ -7,27 +7,19 @@ import styles from './main.layout.css';
 import Sidebar from 'components/sidebar/sidebar';
 
 
-class MainLayout extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
+const MainLayout = (props) => {
+    return (
           <div>
             <Sidebar />
             <div>
-              {this.props.main}
+              {props.children}
             </div>
           </div>
-        ) ;
-    }
-}
+    );
+};
 
 export default cssModules(MainLayout, styles);
 
-
 MainLayout.propTypes =  {
-    main: PropTypes.node
+    children: PropTypes.node.required
 };
