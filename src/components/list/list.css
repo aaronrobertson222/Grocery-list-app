@@ -1,0 +1,14 @@
+.list-header-container {
+  width: 100%;
+  background: #999;
+  padding: 5% 0;
+}
+
+.list-header {
+  margin: 0;
+  text-align: center;
+}
+
+.list-container {
+  text-align: center;
+}

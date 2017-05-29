@@ -1,8 +1,7 @@
 .app-sidebar {
-  background: #888;
-  position: fixed;
-  height: 100vh;
-  width: 20%;
+  background: #666;
+  height: 100%;
+  width: 100%;
   min-width: 200px;
   max-width: 400px;
 }

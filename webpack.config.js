@@ -114,6 +114,7 @@ if (isProduction) {
 module.exports = {
   entry: {
     js: 'index.js',
+    css: path.join(srcPath, 'assets/styles/global.css')
   },
   context: srcPath,
   plugins,
@@ -143,7 +144,7 @@ module.exports = {
     stats: {
       assets: true,
       children: false,
-      chunks: false,
+      chunks: true,
       hash: false,
       modules: false,
       publicPath: false,

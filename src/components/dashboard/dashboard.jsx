@@ -6,11 +6,23 @@ import styles from './dashboard.css';
 class Dashboard extends React.Component {
     render() {
         return (
-            <div>
-              Dashboard
-            </div>
+          <div>
+            <section styleName="user-info">
+              <h1 styleName="username">User Name</h1>
+            </section>
+            <section styleName="list-section">
+              <header styleName="list-section-header">
+                <h2>
+                  My Lists
+                </h2>
+              </header>
+              <p>
+                lists
+              </p>
+            </section>
+          </div>
         );
     }
-}
+  }
 
 export default cssModules(Dashboard, styles);

@@ -1,0 +1,12 @@
+.sidebar {
+  width: 20%;
+  display: inline-block;
+  height: 100vh;
+  position: fixed;
+}
+
+.main {
+  margin-left: 20%;
+  display: inline-block;
+  width: 80%;
+}

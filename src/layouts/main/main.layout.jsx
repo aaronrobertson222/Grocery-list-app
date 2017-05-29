@@ -9,9 +9,11 @@ import Sidebar from 'components/sidebar/sidebar';
 
 const MainLayout = (props) => {
     return (
-          <div>
-            <Sidebar />
-            <div>
+          <div className="container">
+            <div styleName="sidebar">
+              <Sidebar />
+            </div>
+            <div styleName="main">
               {props.children}
             </div>
           </div>
