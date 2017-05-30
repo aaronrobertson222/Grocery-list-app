@@ -1,5 +1,7 @@
 const express = require('express');
 const passport = require('passport');
+const path = require('path');
+const { logger } = require('../config/logger.config');
 
 const {User} = require('../models');
 const router = express.Router();
@@ -64,6 +66,7 @@ router.post('/', (req, res) => {
         return res.status(201).json(user.apiRepr());
     })
     .catch(err => {
+        logger.error(err);
         return res.status(500).sendFile(path.join(__dirname, '../public', 'error.html'));
     });
 });
@@ -91,6 +94,7 @@ router.post('/login', (req, res) => {
           }
       })
       .catch(err => {
+          logger.error(err);
           return res.status(500).json({message: 'Internal server error. Oops!'});
       });
 });

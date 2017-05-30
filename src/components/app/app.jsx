@@ -11,7 +11,6 @@ import Dashboard from 'components/dashboard/dashboard';
 import List from 'components/list/list';
 import Navbar from 'components/navbar/navbar';
 
-
 const App = () => {
     return (
       <Router>

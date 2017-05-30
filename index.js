@@ -3,13 +3,14 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path = require('path');
+const { logger } = require('./config/logger.config');
 
 
 mongoose.Promise = global.Promise;
 
-const {PORT, DATABASE_URL} = require('./config');
+const {PORT, DATABASE_URL} = require('./config/app.config');
 
-const { router: userRouter } = require('/routes/user-router');
+const { router: userRouter } = require('./routes/user-router');
 
 const app = express();
 app.use(morgan('dev'));
@@ -35,9 +36,9 @@ function runServer(databaseUrl) {
             if (err) {
                 return rej(err);
             }
-            console.log(`connected to ${databaseUrl}`);
+            logger.info(`connected to ${databaseUrl}`);
             server = app.listen(PORT, () => {
-                console.log(`App is listening on port ${PORT}`);
+                logger.info(`App is listening on port ${PORT}`);
                 res();
             })
       .on('error', err => {
@@ -51,7 +52,7 @@ function runServer(databaseUrl) {
 function closeServer() {
     return mongoose.disconnect().then(() => {
         return new Promise((res, rej) => {
-            console.log('Closing server.');
+            logger.info('Closing server.');
             server.close((err) => {
                 if (err) {
                     return rej(err);
@@ -63,7 +64,7 @@ function closeServer() {
 }
 
 if (require.main === module) {
-    runServer(DATABASE_URL).catch(err => console.log(err));
+    runServer(DATABASE_URL).catch(err => logger.error(err));
 }
 
 module.exports = { app, runServer, closeServer };
