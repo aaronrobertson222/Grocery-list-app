@@ -3,7 +3,7 @@ import cssModules from 'react-css-modules';
 
 import styles from './landing.layout.css';
 
-import Navbar from 'components/navbar/navbar';
+import Navbar from '../../components/navbar/navbar';
 
 class LandingLayout extends React.Component {
     render() {

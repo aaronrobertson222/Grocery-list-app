@@ -17,7 +17,8 @@
     },
     "plugins": [
         "react",
-        "import"
+        "import",
+        "jest"
     ],
     "rules": {
         "indent": [
@@ -43,5 +44,8 @@
        "import/resolver": {
          "webpack": "webpack.config.js"
         }
+    },
+    "env": {
+      "jest/globals": true
     }
 }
