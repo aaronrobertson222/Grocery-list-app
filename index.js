@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const {BasicStrategy} = require('passport-http');
 const morgan = require('morgan');
 const path = require('path');
 const { logger } = require('./config/logger.config');
@@ -12,14 +14,32 @@ const {PORT, DATABASE_URL} = require('./config/app.config');
 
 const { router: userRouter } = require('./routes/user-router');
 
+const {User} = require('./models');
+
 const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
 app.use(express.static('build'));
 
+passport.use(new BasicStrategy(
+  function (username, password, done) {
+      User.findOne({username: username}, function (err, user) {
+          if (err) {
+              return done(err);
+          }
+          if (!user) {
+              return done(null, false);
+          }
+          if (!user.validPassword(password)) {
+              return done(null, false);
+          }
+      });
+  }
+));
+
 app.get('/', (req, res) => {
-    res.json({message: 'welcome'});
+    res.json({message: 'welcome', user: req.user});
 });
 
 app.use('/api/users', userRouter);

@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const {BasicStrategy} = require('passport-http');
 const path = require('path');
 const { logger } = require('../config/logger.config');
 
@@ -71,32 +72,8 @@ router.post('/', (req, res) => {
     });
 });
 
-router.post('/login', (req, res) => {
-    const {username, password} = req.body;
-    if (!req.body.username || !req.body.password) {
-        return res.status(400).json({message: 'missing field in body'});
-    }
-    User
-      .findOne({username: username})
-      .exec()
-      .then((_user) => {
-          let user = _user;
-          if (!user) {
-              return res.status(404).json({message: 'Incorrect username or password.'});
-          }
-          return user.validatePassword(password);
-      })
-      .then(isValid => {
-          if (!isValid) {
-              return res.status(400).json({message: 'Incorrect username or password.'});
-          } else {
-
-          }
-      })
-      .catch(err => {
-          logger.error(err);
-          return res.status(500).json({message: 'Internal server error. Oops!'});
-      });
+router.post('/login', passport.authenticate('basic', { session: false }), (req, res) => {
+    res.json(req.user);
 });
 
 module.exports = { router };
