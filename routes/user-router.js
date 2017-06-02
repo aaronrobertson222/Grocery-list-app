@@ -1,7 +1,9 @@
 const express = require('express');
 const passport = require('passport');
-const {BasicStrategy} = require('passport-http');
+const jwt = require('jsonwebtoken');
 const path = require('path');
+
+const { SECRET, EXPIRATIONTIME } = require('../config/app.config');
 const { logger } = require('../config/logger.config');
 
 const {User} = require('../models');
@@ -72,8 +74,42 @@ router.post('/', (req, res) => {
     });
 });
 
-router.post('/login', passport.authenticate('basic', { session: false }), (req, res) => {
-    res.json(req.user);
+router.post('/login', (req, res) => {
+    const {username, password} = req.body;
+    if (!req.body.username || !req.body.password) {
+        return res.status(400).json({message: 'missing field in body'});
+    }
+    User
+    .findOne({username: username})
+    .exec()
+    .then(_user => {
+        const user = _user;
+        if (!user) {
+            return res.status(401).json({message: 'Incorrect username.'});
+        }
+        return user;
+    })
+    .then(user => {
+        if (!user.validatePassword(password)) {
+            return res.status(401).json({message: 'Incorrect password.'});
+        } else {
+            const token = jwt.sign(user, SECRET);
+            res.status(200).json({
+                success: true,
+                token: 'JWT ' + token,
+                tokenExpiration: new Date(Date.now() + EXPIRATIONTIME),
+                user: user.apiRepr()
+            });
+        }
+    })
+    .catch(err => {
+        logger.error(err);
+        res.status(500).json({message: 'Internal server error'});
+    });
+});
+
+router.get('/test', passport.authenticate('jwt', { session: false }), (req, res) => {
+    res.json({message: 'success'});
 });
 
 module.exports = { router };
