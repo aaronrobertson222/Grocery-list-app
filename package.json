@@ -23,17 +23,22 @@
     "babel-polyfill": "^6.23.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.1",
+    "cross-env": "^5.0.0",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
+    "jsonwebtoken": "^7.4.1",
     "moment": "^2.18.1",
     "mongoose": "^4.9.8",
     "passport": "^0.3.2",
+    "passport-http": "^0.3.0",
+    "passport-jwt": "^2.2.1",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-css-modules": "^4.3.0",
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.0",

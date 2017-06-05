@@ -1,5 +1,10 @@
 const express = require('express');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const path = require('path');
+
+const { SECRET, EXPIRATIONTIME } = require('../config/app.config');
+const { logger } = require('../config/logger.config');
 
 const {User} = require('../models');
 const router = express.Router();
@@ -64,6 +69,7 @@ router.post('/', (req, res) => {
         return res.status(201).json(user.apiRepr());
     })
     .catch(err => {
+        logger.error(err);
         return res.status(500).sendFile(path.join(__dirname, '../public', 'error.html'));
     });
 });
@@ -74,25 +80,32 @@ router.post('/login', (req, res) => {
         return res.status(400).json({message: 'missing field in body'});
     }
     User
-      .findOne({username: username})
-      .exec()
-      .then((_user) => {
-          let user = _user;
-          if (!user) {
-              return res.status(404).json({message: 'Incorrect username or password.'});
-          }
-          return user.validatePassword(password);
-      })
-      .then(isValid => {
-          if (!isValid) {
-              return res.status(400).json({message: 'Incorrect username or password.'});
-          } else {
-
-          }
-      })
-      .catch(err => {
-          return res.status(500).json({message: 'Internal server error. Oops!'});
-      });
+    .findOne({username: username})
+    .exec()
+    .then(_user => {
+        const user = _user;
+        if (!user) {
+            return res.status(401).json({message: 'Incorrect username.'});
+        }
+        return user;
+    })
+    .then(user => {
+        if (!user.validatePassword(password)) {
+            return res.status(401).json({message: 'Incorrect password.'});
+        } else {
+            const token = jwt.sign(user, SECRET);
+            res.status(200).json({
+                success: true,
+                token: 'JWT ' + token,
+                tokenExpiration: new Date(Date.now() + EXPIRATIONTIME),
+                user: user.apiRepr()
+            });
+        }
+    })
+    .catch(err => {
+        logger.error(err);
+        res.status(500).json({message: 'Internal server error'});
+    });
 });
 
 module.exports = { router };
