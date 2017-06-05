@@ -30,6 +30,7 @@ ListSchema.methods.apiRepr = function () {
         listName: this.listName,
         items: this.items,
         listOwner: this.listOwner,
+        listUsers: this.listUsers,
         dateCreated: moment(this.dateCreated).format('MMM DD, YYYY')
     };
 };
