@@ -10,6 +10,7 @@ const { logger } = require('./config/logger.config');
 const { DATABASE_URL, PORT, SECRET } = require('./config/app.config');
 
 const { router: userRouter } = require('./routes/user-router');
+const { router: listRouter } = require('./routes/list-router');
 
 const { User } = require('./models');
 
@@ -39,11 +40,12 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
 }));
 
 //Routes//
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.json({message: 'welcome', user: req.user});
 });
 
 app.use('/api/users', userRouter);
+app.use('/api/lists', listRouter);
 
 app.get('*', (req, res) => {
     res.status(404).send('Whoops something went wrong!');

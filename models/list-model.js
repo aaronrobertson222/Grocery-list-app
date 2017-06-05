@@ -8,19 +8,31 @@ const ListSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    listOwner: {
+        type: String,
+        required: true
+    },
     dateCreated: {
         type: Date,
         required: true
+    },
+    items: {
+        type: Array
+    },
+    listUsers: {
+        type: Array
     }
 });
 
-ListSchema.methods.apiRepr = () => (
-    {
+ListSchema.methods.apiRepr = function () {
+    return {
         id: this._id,
         listName: this.listName,
-        dateCreated: moment(this.dateCreated).formate('MMM DD, YYYY')
-    }
-);
+        items: this.items,
+        listOwner: this.listOwner,
+        dateCreated: moment(this.dateCreated).format('MMM DD, YYYY')
+    };
+};
 
 const List = mongoose.model('List', ListSchema);
 
