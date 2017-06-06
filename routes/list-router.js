@@ -40,7 +40,7 @@ router.post('/',
       });
   });
 
-router.get('/:id',
+router.get('/id/:id',
   passport.authenticate('jwt', {
       session: false
   }), (req, res) => {
@@ -54,7 +54,7 @@ router.get('/:id',
               return res.status(404).json({
                   message: 'List not found.'
               });
-          } else if (list.listUsers.indexOf(req.user.username) !== -1) {
+          } else if (list.listUsers.indexOf(req.user.username) !== -1 || list.listOwner === req.user.id) {
               return res.status(200).json({
                   list: list.apiRepr()
               });
@@ -73,18 +73,18 @@ router.get('/:id',
       });
   });
 
-router.get('/mylists',
+router.get('/',
   passport.authenticate('jwt', {
       session: false
   }), (req, res) => {
       return List
       .find({
-          listOwner: req.user.id
+          'listOwner': req.user._id
       })
       .exec()
       .then(lists => {
           return res.status(200).json({
-              lists: lists
+              lists: lists.map(list => list.apiRepr())
           })
           .catch(err => {
               logger.error(err);
@@ -95,6 +95,27 @@ router.get('/mylists',
       });
   });
 
+router.get('/shared',
+            passport.authenticate('jwt', {
+                session: false
+            }), (req, res) => {
+                return List
+                .find({
+                    'listUsers': req.user.username
+                })
+                .exec()
+                .then(lists => {
+                    return res.status(200).json({
+                        lists: lists.map(list => list.apiRepr())
+                    })
+                  .catch(err => {
+                      logger.error(err);
+                      return res.status(500).json({
+                          message: 'Oops! internal server error'
+                      });
+                  });
+                });
+            });
 
 module.exports = {
     router
