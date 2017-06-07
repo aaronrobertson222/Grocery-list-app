@@ -7,7 +7,8 @@
     "clean": "rimraf ./build/*",
     "start": "parallelshell 'npm run clean' 'cross-env NODE_ENV=development webpack-dev-server -d --history-api-fallback --progress --colors' 'nodemon index.js'",
     "lint": "cross-env NODE_ENV=development eslint --ext .js --ext .jsx src/ || exit 0",
-    "test": "jest src/"
+    "test-client": "jest src/",
+    "test-server": "mocha test/"
   },
   "repository": {
     "type": "git",
@@ -58,6 +59,7 @@
     "eslint-config-standard": "^10.2.1",
     "eslint-import-resolver-webpack": "^0.8.1",
     "eslint-loader": "^1.7.1",
+    "eslint-plugin-chai-friendly": "^0.3.6",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jest": "^20.0.3",
     "eslint-plugin-jsx-a11y": "^5.0.1",
