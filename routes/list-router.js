@@ -1,69 +1,122 @@
 const express = require('express');
 const passport = require('passport');
 
-const { logger } = require('../config/logger.config');
+const {
+  logger
+} = require('../config/logger.config');
 
-const {List} = require('../models');
+const {
+  List
+} = require('../models');
 
 const router = express.Router();
 
 router.post('/',
+  passport.authenticate('jwt', {
+      session: false
+  }), (req, res) => {
+
+      const newList = {
+          listName: req.body.listName,
+          listOwner: req.user.id,
+          dateCreated: Date.now(),
+          items: req.body.items,
+          listUsers: req.body.listUsers
+      };
+
+      return List
+      .create(newList)
+      .then(list => {
+          return res.status(201).json({
+              message: 'List creation success!',
+              list: list.apiRepr()
+          })
+          .catch(err => {
+              logger.error(err);
+              return res.status(500).json({
+                  message: 'Oops! Internal server error...'
+              });
+          });
+      });
+  });
+
+router.get('/id/:id',
+  passport.authenticate('jwt', {
+      session: false
+  }), (req, res) => {
+      return List
+      .findOne({
+          '_id': req.params.id
+      })
+      .exec()
+      .then(list => {
+          if (!list) {
+              return res.status(404).json({
+                  message: 'List not found.'
+              });
+          } else if (list.listUsers.indexOf(req.user.username) !== -1 || list.listOwner === req.user.id) {
+              return res.status(200).json({
+                  list: list.apiRepr()
+              });
+          } else {
+              return res.status(401).json({
+                  message: 'You do not have access to that list'
+              });
+          }
+      })
+      .catch(err => {
+          logger.error(err);
+          return res.status(500).json({
+              message: 'Oops! Internal server error'
+          });
+
+      });
+  });
+
+router.get('/',
+  passport.authenticate('jwt', {
+      session: false
+  }), (req, res) => {
+      return List
+      .find({
+          'listOwner': req.user._id
+      })
+      .exec()
+      .then(lists => {
+          return res.status(200).json({
+              lists: lists.map(list => list.apiRepr())
+          })
+          .catch(err => {
+              logger.error(err);
+              return res.status(500).json({
+                  message: 'Oops! internal server error'
+              });
+          });
+      });
+  });
+
+router.get('/shared',
             passport.authenticate('jwt', {
                 session: false
             }), (req, res) => {
-
-                const newList = {
-                    listName: req.body.listName,
-                    listOwner: req.user.id,
-                    dateCreated: Date.now(),
-                    items: req.body.items,
-                    listUsers: req.body.listUsers
-                };
-
                 return List
-                .create(newList)
-                .then(list => {
-                    return res.status(201).json({
-                        message: 'List creation success!',
-                        list: list.apiRepr()
+                .find({
+                    'listUsers': req.user.username
+                })
+                .exec()
+                .then(lists => {
+                    return res.status(200).json({
+                        lists: lists.map(list => list.apiRepr())
                     })
-                .catch(err => {
-                    logger.error(err);
-                    return res.status(500).json({
-                        message: 'Oops! Internal server error...'
-                    });
-                });
+                  .catch(err => {
+                      logger.error(err);
+                      return res.status(500).json({
+                          message: 'Oops! internal server error'
+                      });
+                  });
                 });
             });
 
-router.get('/:id',
-           passport.authenticate('jwt', {
-               session: false
-           }), (req, res) => {
-               return List
-              .findOne({
-                  '_id': req.params.id
-              })
-              .exec()
-              .then(list => {
-                  if (!list) {
-                      return res.status(404).json({
-                          message: 'List not found.'
-                      });
-                  } else {
-                      return res.status(200).json({
-                          list: list.apiRepr()
-                      });
-                  }
-              })
-              .catch(err => {
-                  logger.error(err);
-                  return res.status(500).json({
-                      message: 'Oops! Internal server error'
-                  });
-
-              });
-           });
-
-
-module.exports = { router };
+module.exports = {
+    router
+};
