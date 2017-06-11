@@ -89,12 +89,12 @@ router.post('/login', (req, res) => {
         }
         return user;
     })
-    .then(user => {
+    .then((user)=> {
         if (!user.validatePassword(password)) {
             return res.status(401).json({message: 'Incorrect password.'});
         } else {
             const token = jwt.sign(user, SECRET);
-            res.status(200).json({
+            return res.status(200).json({
                 success: true,
                 token: 'JWT ' + token,
                 tokenExpiration: new Date(Date.now() + EXPIRATIONTIME),
@@ -103,8 +103,8 @@ router.post('/login', (req, res) => {
         }
     })
     .catch(err => {
-        logger.error(err);
-        res.status(500).json({message: 'Internal server error'});
+        logger.error('error ' + err);
+        return res.status(500).json({message: 'Internal server error'});
     });
 });
 

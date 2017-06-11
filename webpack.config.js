@@ -122,7 +122,12 @@ module.exports = {
     rules,
   },
   resolve: {
-    extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx', '.css'],
+    alias: {
+      components: path.join(__dirname, 'src', 'components'),
+      actions: path.join(__dirname, 'src', 'actions'),
+      reducers: path.join(__dirname, 'src', 'reducers'),
+    },
+    extensions: ['.js', '.jsx', '.css'],
     modules: [
       path.resolve(__dirname, 'node_modules'),
       srcPath,

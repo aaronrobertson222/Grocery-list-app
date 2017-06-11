@@ -3,7 +3,6 @@ import cssModules from 'react-css-modules';
 
 import styles from './navbar.css';
 
-
 class Navbar extends React.Component {
     render() {
         return (
@@ -12,21 +11,11 @@ class Navbar extends React.Component {
               <div styleName="navbar-header">
                 <h1>Grocery List App</h1>
               </div>
-              <div styleName="navbar-menu">
-                <ul>
-                  <li>
-                    Home
-                  </li>
-                  <li>
-                    About
-                  </li>
-                </ul>
-              </div>
               <div styleName="login-options">
                 <p styleName="login-option">
-                  Sign In
+                  Login / Demo
                 </p>
-                <p styleName="login-option">
+                <p styleName="login-option signup">
                   Sign Up
                 </p>
               </div>
@@ -36,4 +25,4 @@ class Navbar extends React.Component {
     }
 }
 
-export default cssModules(Navbar, styles);
+export default cssModules(Navbar, styles, { allowMultiple: true });

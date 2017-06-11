@@ -4,14 +4,15 @@
   top: 0;
   left: 0;
   right: 0;
-  background: #888;
+  background: #FFF;
+  z-index: 2;
 }
 
 .container {
   width: 960px;
   margin: auto;
   position: relative;
-  height: 4em;
+  height: 80px;
 }
 
 .navbar-header {
@@ -22,28 +23,28 @@
 }
 
 .navbar-header > h1 {
-
-}
-
-.navbar-menu {
-  display: inline-block;
-  margin-left: 200px;
-}
-
-.navbar-menu > ul {
-  list-style: none;
-}
-
-.navbar-menu > ul > li {
-  display: inline-block;
+    margin: 0;
+    line-height: 80px;
 }
 
 .login-options {
   display: inline-block;
+  height: 100%;
   position: absolute;
   right: 0;
+  top: 50%;
+  transform: translateY(-25%);
 }
 
 .login-option {
   display: inline-block;
+  margin: 0;
+  padding: 10px 15px;
+  font-size: 1.1em;
+}
+
+.signup {
+  border: 2px solid #4776E6;
+  border-radius: 2px;
+  color: #4776E6;
 }
