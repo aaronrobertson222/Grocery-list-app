@@ -10,6 +10,8 @@ import { fetchLogin } from 'actions/index.actions';
 import Navbar from 'components/navbar/navbar';
 import Hero from 'components/hero/hero';
 import About from 'components/about/about';
+//import Login from 'components/login/login';
+import Signup from 'components/signup/signup';
 
 class LandingLayout extends React.Component {
     render() {
@@ -19,7 +21,7 @@ class LandingLayout extends React.Component {
             <div styleName="content">
               <Hero />
               <About />
-              <button onClick={this.props.fetchLogin.bind(null, 'aaron', 'blahblah2345')}>My Button</button>
+              <Signup />
             </div>
           </div>
         );

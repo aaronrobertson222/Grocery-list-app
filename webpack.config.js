@@ -8,6 +8,10 @@ const isProduction = nodeEnv !== 'development';
 const buildPath = path.join(__dirname, './build/');
 const srcPath = path.join(__dirname, './src/');
 const imgPath = path.join(__dirname, './src/assets/images/');
+const httpServicePath = __dirname + '/src/redux/services/http.js';
+
+const envConfigFile = 'testing' ? 'development' : process.env.NODE_ENV || 'default';
+const envConfigPath = __dirname + '/src/config/environments/' + envConfigFile + '.js';
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -126,6 +130,7 @@ module.exports = {
       components: path.join(__dirname, 'src', 'components'),
       actions: path.join(__dirname, 'src', 'actions'),
       reducers: path.join(__dirname, 'src', 'reducers'),
+      httpService: httpServicePath,
     },
     extensions: ['.js', '.jsx', '.css'],
     modules: [

@@ -45,32 +45,20 @@ router.post('/', (req, res) => {
         return res.status(422).json({message: 'Incorrect field length: password'});
     }
 
-    return User
-    .find({username})
-    .count()
-    .exec()
-    .then(count => {
-        if (count > 0) {
-            return res.status(422).json({message: 'Username is already taken.'});
+    const newUser = new User({
+        username,
+        password,
+        firstName,
+        lastName,
+        joinedDate: Date.now()
+    });
+
+    newUser.save(err => {
+        if (err) {
+            return res.status(409).json({success: false, message: 'Username already exists'});
+        } else {
+            return res.status(201).json({success: true, message: 'User creation successful'});
         }
-        return User.hashPassword(password);
-    })
-    .then(hash => {
-        return User
-        .create({
-            username: username,
-            password: hash,
-            firstName: firstName,
-            lastName: lastName,
-            joinedDate: Date.now()
-        });
-    })
-    .then(user => {
-        return res.status(201).json(user.apiRepr());
-    })
-    .catch(err => {
-        logger.error(err);
-        return res.status(500).sendFile(path.join(__dirname, '../public', 'error.html'));
     });
 });
 
@@ -90,7 +78,7 @@ router.post('/login', (req, res) => {
         return user;
     })
     .then((user)=> {
-        if (!user.validatePassword(password)) {
+        if (!(user.validatePassword(password))) {
             return res.status(401).json({message: 'Incorrect password.'});
         } else {
             const token = jwt.sign(user, SECRET);

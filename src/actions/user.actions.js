@@ -1,16 +1,14 @@
 import * as actionTypes from './actionTypes';
+import fetch from 'httpService';
 
 export function fetchLogin (username, password) {
     const promise = fetch('http://localhost:8080/api/users/login', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
         body: JSON.stringify({
             username,
             password
         })
-    });
+    }, true);
 
     return {
         onRequest: actionTypes.FETCH_LOGIN_REQUEST_TRIGGERED,
@@ -22,18 +20,15 @@ export function fetchLogin (username, password) {
 }
 
 export function createUser(username, password, firstName, lastName) {
-    const promise = fetch('htttp://localhost:8080/api/users', {
+    const promise = fetch('http://localhost:8080/api/users', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
         body: JSON.stringify({
             username,
             password,
             firstName,
             lastName
         })
-    });
+    }, true);
 
     return {
         onRequest: actionTypes.CREATE_USER_REQUEST_TRIGGERED,

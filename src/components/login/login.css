@@ -1,0 +1,41 @@
+.login-form-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 3;
+  background: rgba(200, 200, 200, .9);
+}
+
+.login-form {
+  margin: 200px auto;
+  display: table;
+  background: #fff;
+  padding: 20px;
+}
+
+.form-header {
+  text-align: center;
+  margin: 0;
+}
+
+.form-group {
+  margin: auto;
+  padding: 5px 0;
+}
+
+.form-input-label {
+  margin-bottom: 10px;
+}
+
+.form-input {
+  width: 290px;
+  height: 25px;
+}
+
+.form-submit-button {
+  margin: auto;
+  display: block;
+}
