@@ -68,31 +68,27 @@ router.post('/login', (req, res) => {
         return res.status(400).json({message: 'missing field in body'});
     }
     User
-    .findOne({username: username})
-    .exec()
-    .then(_user => {
-        const user = _user;
-        if (!user) {
-            return res.status(401).json({message: 'Incorrect username.'});
+    .findOne({username: username}, function(err, user) {
+        if (err) {
+            return res.status(500).json({message: 'Internal Server error'});
         }
-        return user;
-    })
-    .then((user)=> {
-        if (!(user.validatePassword(password))) {
-            return res.status(401).json({message: 'Incorrect password.'});
+        if (!user) {
+            return res.status(404).json({message: 'Incorrect Username'});
         } else {
-            const token = jwt.sign(user, SECRET);
-            return res.status(200).json({
-                success: true,
-                token: 'JWT ' + token,
-                tokenExpiration: new Date(Date.now() + EXPIRATIONTIME),
-                user: user.apiRepr()
+            user.validatePassword(password, function(err, isMatch) {
+                if (isMatch && !err) {
+                    const token = jwt.sign(user, SECRET);
+                    return res.status(200).json({
+                        success: true,
+                        token: 'JWT ' + token,
+                        tokenExpiration: new Date(Date.now() + EXPIRATIONTIME),
+                        user: user.apiRepr()
+                    });
+                } else {
+                    res.status(401).json({message: 'authentication failed'});
+                }
             });
         }
-    })
-    .catch(err => {
-        logger.error('error ' + err);
-        return res.status(500).json({message: 'Internal server error'});
     });
 });
 

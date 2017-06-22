@@ -11,6 +11,21 @@ import Dashboard from 'components/dashboard/dashboard';
 import List from 'components/list/list';
 import Navbar from 'components/navbar/navbar';
 
+const LandingRoute =
+  <Route exact path="/" render={(props) => (
+    <LandingLayout {...props}>
+      <Navbar/>
+    </LandingLayout>
+  )}/>;
+
+const MainRoute =
+<Route path="/app" render={(props) => (
+    <MainLayout {...props}>
+      <Route path="/app/dashboard" render={(props) => (<Dashboard {...props}/>)} />
+      <Route path="/app/list" render={(props) => (<List {...props} />)} />
+    </MainLayout>
+  )}/>;
+
 const App = () => {
     return (
       <Router>

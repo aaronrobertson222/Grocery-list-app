@@ -1,4 +1,4 @@
-.login-form-wrapper {
+.modal-wrapper {
   position: fixed;
   width: 100%;
   height: 100vh;
@@ -10,10 +10,11 @@
 }
 
 .login-form {
-  margin: 200px auto;
+  margin: 100px auto;
   display: table;
   background: #fff;
   padding: 20px;
+  border-radius: 3px;
 }
 
 .form-header {
@@ -38,4 +39,21 @@
 .form-submit-button {
   margin: auto;
   display: block;
+}
+
+.close-modal-button {
+  position: absolute;
+  right: 10px;
+  font-size: 45px;
+  border: none;
+  background: none;
+}
+
+.close-modal-button:hover {
+    color: #4776E6;
+    cursor: pointer;
+}
+
+.demo-account-section {
+  text-align: center;
 }

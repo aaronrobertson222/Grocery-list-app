@@ -28,8 +28,13 @@ UserSchema.methods.apiRepr = function() {
     };
 };
 
-UserSchema.methods.validatePassword = function(password) {
-    return bcrypt.compare(password, this.password);
+UserSchema.methods.validatePassword = function(password, cb) {
+    return bcrypt.compare(password, this.password, function(err, isMatch) {
+        if (err) {
+            return cb(err);
+        }
+        cb(null, isMatch);
+    });
 };
 
 UserSchema.statics.hashPassword = function(password) {

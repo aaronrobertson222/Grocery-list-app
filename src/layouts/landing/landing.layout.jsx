@@ -10,7 +10,7 @@ import { fetchLogin } from 'actions/index.actions';
 import Navbar from 'components/navbar/navbar';
 import Hero from 'components/hero/hero';
 import About from 'components/about/about';
-//import Login from 'components/login/login';
+import Login from 'components/login/login';
 import Signup from 'components/signup/signup';
 
 class LandingLayout extends React.Component {
@@ -19,6 +19,7 @@ class LandingLayout extends React.Component {
           <div>
             <Navbar />
             <div styleName="content">
+              {this.props.isVisible && <Login />}
               <Hero />
               <About />
               <Signup />
@@ -30,8 +31,13 @@ class LandingLayout extends React.Component {
 
 LandingLayout.propTypes = {
     fetchLogin: PropTypes.func.isRequired,
+    isVisible: PropTypes.bool.isRequired
 };
 
-export default connect(null, {
+const mapStateToProps = state => ({
+    isVisible: state.modal.isVisible
+});
+
+export default connect(mapStateToProps, {
     fetchLogin
 })(cssModules(LandingLayout, styles, { allowMultiple: true }));

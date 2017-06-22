@@ -43,6 +43,10 @@
   font-size: 1.1em;
 }
 
+.login-option:hover {
+  cursor: pointer;
+}
+
 .signup {
   border: 2px solid #4776E6;
   border-radius: 2px;
