@@ -20,7 +20,9 @@ import NewList from 'components/newList/newList';
 class App extends React.Component {
 
     componentWillMount() {
-        this.props.fetchUsersInfo();
+        if (this.props.user === null) {
+            this.props.fetchUsersInfo();
+        }
     }
 
     render() {
@@ -33,11 +35,11 @@ class App extends React.Component {
                   </LandingLayout>
               )}/>
             <Route path="/app" render={(props) => (
-                  props.user !== null ? (
+                  this.props.user ? (
                   <MainLayout {...props}>
-                    <Route path="/app" render={(props) => (<Dashboard {...props} />)} />
-                    <Route path="/new-list" render={(props) => (<NewList {...props} />)} />
-                    <Route path="/list" render={(props) => (<List {...props} />)} />
+                    <Route exact path="/app" render={(props) => (<Dashboard {...props} />)} />
+                    <Route exact path="/app/newlist" render={(props) => (<NewList {...props} />)} />
+                    <Route exact path="/app/list/:id" render={(props) => (<List {...props} />)} />
                   </MainLayout>
                 ) : (
                   <Redirect to={{

@@ -2,6 +2,7 @@ import React from 'react';
 import cssModules from 'react-css-modules';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import styles from './landing.layout.css';
 
@@ -15,6 +16,13 @@ import Signup from 'components/signup/signup';
 
 class LandingLayout extends React.Component {
     render() {
+        if (this.props.user) {
+            return (
+              <Redirect to={{
+                  pathname: '/app'
+              }} />
+            );
+        }
         return (
           <div>
             <Navbar />
@@ -31,11 +39,13 @@ class LandingLayout extends React.Component {
 
 LandingLayout.propTypes = {
     fetchLogin: PropTypes.func.isRequired,
-    isVisible: PropTypes.bool.isRequired
+    isVisible: PropTypes.bool.isRequired,
+    user: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-    isVisible: state.modal.isVisible
+    isVisible: state.modal.isVisible,
+    user: state.user.user
 });
 
 export default connect(mapStateToProps, {

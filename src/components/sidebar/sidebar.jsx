@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import cssModules from 'react-css-modules';
 
@@ -17,10 +18,14 @@ class Sidebar extends React.Component {
             <nav styleName="sidebar-nav">
               <ul styleName="sidebar-nav-list">
                 <li styleName="sidebar-nav-list-items">
-                  Dashboard
+                  <Link to="/app">
+                    <p>Dashboard</p>
+                  </Link>
                 </li>
                 <li styleName="sidebar-nav-list-items">
-                  My Account
+                  <Link to="/app/newlist">
+                    <p>New List</p>
+                  </Link>
                 </li>
               </ul>
             </nav>

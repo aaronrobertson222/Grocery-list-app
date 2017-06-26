@@ -16,3 +16,10 @@
 .list-section-header {
   text-align: center;
 }
+
+.lists-container {
+}
+
+.list {
+  border: 1px solid red;
+}

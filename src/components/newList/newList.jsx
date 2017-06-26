@@ -9,7 +9,7 @@ class NewList extends React.Component {
     render() {
         return (
           <div>
-              new project
+              new list
           </div>
         );
     }

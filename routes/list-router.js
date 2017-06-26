@@ -40,7 +40,7 @@ router.post('/',
       });
   });
 
-router.get('/id/:id',
+router.post('/id/:id',
   passport.authenticate('jwt', {
       session: false
   }), (req, res) => {
@@ -85,15 +85,16 @@ router.get('/',
       .then(lists => {
           return res.status(200).json({
               lists: lists.map(list => list.apiRepr())
-          })
-          .catch(err => {
-              logger.error(err);
-              return res.status(500).json({
-                  message: 'Oops! internal server error'
-              });
+          });
+      })
+      .catch(err => {
+          logger.error(err);
+          return res.status(500).json({
+              message: 'Oops! internal server error'
           });
       });
   });
+
 
 router.get('/shared',
             passport.authenticate('jwt', {

@@ -4,24 +4,23 @@ const MAIN_APP_AUTHORITY = envConfig.MAIN_APP_AUTHORITY;
 
 export default {
 
-    /**************
-    user info path
-    **************/
+    //user info path
     USER_INFO_PATH: `${MAIN_APP_AUTHORITY}/api/users/me`,
 
-    /**************
-    user login path
-    **************/
+
+    // user login path
     USER_LOGIN_PATH: `${MAIN_APP_AUTHORITY}/api/users/login`,
 
-    /**************
-    new user signup path
-    **************/
+    // new user signup path
     USER_SIGNUP_PATH: `${MAIN_APP_AUTHORITY}/api/users`,
 
-    /**************
-    new list path
-    **************/
-    NEW_LIST_PATH: `${MAIN_APP_AUTHORITY}/api/lists`
+    // new list path
+    NEW_LIST_PATH: `${MAIN_APP_AUTHORITY}/api/lists`,
+
+    // new list path
+    USERS_LISTS_PATH: `${MAIN_APP_AUTHORITY}/api/lists`,
+
+    // list by id path
+    LIST_ID_PATH: `${MAIN_APP_AUTHORITY}/api/lists/id/`,
 
 };
