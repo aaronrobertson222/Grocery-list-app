@@ -92,4 +92,8 @@ router.post('/login', (req, res) => {
     });
 });
 
+router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
+    res.status(200).json({user: req.user.apiRepr()});
+});
+
 module.exports = { router };
