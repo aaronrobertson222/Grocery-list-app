@@ -1,3 +1,7 @@
+.list-info {
+
+}
+
 .list-header-container {
   width: 100%;
   background: #999;
@@ -9,18 +13,29 @@
   text-align: center;
 }
 
+.list-edit-button {
+  display: table;
+  margin: auto;
+}
+
 .list-container {
-  text-align: center;
+  width: 75%;
+  margin: auto;
 }
 
 .list-item {
-
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  position: relative;
 }
 
-.list-item-name {
-
+.list-item-name, .list-item-quantity {
+  font-size: 20px;
+  width: 40%;
 }
 
-.list-item-quantity {
-  
+.list-item-check {
+  font-size: 20px;
+  width: 20%;
 }

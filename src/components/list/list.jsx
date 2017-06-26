@@ -26,25 +26,27 @@ class List extends React.Component {
                 itemsElements.push(
                   <div key={i} styleName="list-item">
                     <p styleName="list-item-name">{currentList.items[i].item}</p>
-                    <p styleName="list-item-quantity">{currentList.items[i].quantity}</p>
+                    <p styleName="list-item-quantity">Qty: {currentList.items[i].quantity}</p>
+                    <p styleName="list-item-check">Check</p>
                   </div>
                 );
             }
 
             return (
               <div>
-                <header styleName="list-header-container">
-                  <h1 styleName="list-header">
-                    {this.props.currentList.listName}
-                  </h1>
-                  <div>
-
-                  </div>
-                </header>
+                <section styleName="list-info">
+                  <header styleName="list-header-container">
+                    <h1 styleName="list-header">
+                      {this.props.currentList.listName}
+                    </h1>
+                  </header>
+                </section>
                 <section styleName="list-container">
+                  <h1>Items</h1>
                   <div>
                     {itemsElements}
                   </div>
+                  <h2>Notes</h2>
                 </section>
               </div>
             );

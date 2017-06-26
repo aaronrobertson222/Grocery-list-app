@@ -18,7 +18,7 @@ class Dashboard extends React.Component {
         let listElements = [];
         for (let i = 0; i < lists.length; i++) {
             listElements.push(
-              <Link key={i} to={`/app/list/${lists[i].id}`}>
+              <Link styleName="list-link-item" key={i} to={`/app/list/${lists[i].id}`}>
                 <div styleName="list">
                   <h3>
                     {this.props.lists[i].listName}
