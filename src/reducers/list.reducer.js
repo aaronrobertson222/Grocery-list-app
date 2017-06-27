@@ -8,7 +8,7 @@ const initialState = {
 export default function list(state = initialState, action) {
     switch (action.type) {
     case actionTypes.CREATE_LIST_SUCCESS: {
-        const newLists = state.projects.slice();
+        const newLists = state.lists.slice();
         newLists.unshift(action.response);
         return {
             ...state,

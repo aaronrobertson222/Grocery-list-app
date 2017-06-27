@@ -1,11 +1,13 @@
 require('dotenv').config();
-exports.DATABASE_URL = process.env.DATABASE_URL ||
-                       global.DATABASE_URL ||
-                       'mongodb://localhost/grocery-app-db';
 
-exports.TEST_DATABASE_URL = 'mongodb://localhost/grocer-app-test-db';
+module.exports = {
+    DATABASE_URL: process.env.DATABASE_URL ||
+                        global.DATABASE_URL ||
+                       'mongodb://localhost/grocery-app-db',
 
-exports.PORT = process.env.PORT || 8080;
+    TEST_DATABASE_URL: 'mongodb://localhost/grocer-app-test-db',
+    PORT: process.env.PORT || 8080,
+    SECRET: process.env.SECRET || 'secrettest',
+    EXPIRATIONTIME: process.env.EXPIRATIONTIME,
 
-exports.SECRET = process.env.SECRET || 'secrettest';
-exports.EXPIRATIONTIME = process.env.EXPIRATIONTIME;
+};

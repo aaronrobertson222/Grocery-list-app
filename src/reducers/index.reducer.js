@@ -8,7 +8,7 @@ const mainReducer = combineReducers({
     user,
     modal,
     list,
-    form: reduxFormReducer
+    form: reduxFormReducer,
 });
 
 export default mainReducer;

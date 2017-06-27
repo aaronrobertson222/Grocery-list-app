@@ -2,11 +2,13 @@ import * as actionTypes from './actionTypes';
 import fetch from 'httpService';
 import appConfig from '../config/appConfig';
 
-export function createList() {
+export function createList(listName, items, listUsers) {
     const promise = fetch(appConfig.NEW_LIST_PATH, {
         method: 'POST',
         body: JSON.stringify({
-
+            listName,
+            items,
+            listUsers,
         })
     });
 

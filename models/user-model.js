@@ -14,9 +14,18 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    firstName: {type: String, default: ''},
-    lastName: {type: String, default: ''},
-    joinedDate: {type: Date, required: true}
+    firstName: {
+        type: String,
+        default: ''
+    },
+    lastName: {
+        type: String,
+        default: ''
+    },
+    joinedDate: {
+        type: Date,
+        required: true
+    }
 });
 
 UserSchema.methods.apiRepr = function() {
