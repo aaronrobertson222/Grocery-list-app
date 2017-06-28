@@ -9,5 +9,4 @@ module.exports = {
     PORT: process.env.PORT || 8080,
     SECRET: process.env.SECRET || 'secrettest',
     EXPIRATIONTIME: process.env.EXPIRATIONTIME,
-
 };

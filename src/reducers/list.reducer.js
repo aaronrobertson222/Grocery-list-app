@@ -2,6 +2,7 @@ import * as actionTypes from 'actions/actionTypes';
 
 const initialState = {
     lists: [],
+    sharedLists: [],
     currentList: null,
 };
 
@@ -21,6 +22,13 @@ export default function list(state = initialState, action) {
         return {
             ...state,
             lists,
+        };
+    }
+    case actionTypes.FETCH_USERS_SHARED_LISTS_SUCCESS: {
+        const sharedLists = action.response.lists;
+        return {
+            ...state,
+            sharedLists,
         };
     }
     case actionTypes.FETCH_LIST_BY_ID_SUCCESS: {

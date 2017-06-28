@@ -133,6 +133,7 @@ module.exports = {
       actions: path.join(__dirname, 'src', 'actions'),
       reducers: path.join(__dirname, 'src', 'reducers'),
       httpService: httpServicePath,
+      images: path.join(__dirname, 'src', 'assets', 'images'),
     },
     extensions: ['.js', '.jsx', '.css'],
     modules: [

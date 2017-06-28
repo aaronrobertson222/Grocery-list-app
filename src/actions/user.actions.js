@@ -32,7 +32,7 @@ export function createUser(username, password, firstName, lastName) {
 
     return {
         onRequest: actionTypes.CREATE_USER_REQUEST_TRIGGERED,
-        onSuccess: actionTypes.CREATE_USER_REQUEST_SUCCESS,
+        onSuccess: handleNewUserResponse,
         onFailure: actionTypes.CREATE_USER_REQUEST_FAILURE,
         promise,
     };
@@ -62,4 +62,8 @@ const handleLoginResponse = (response, dispatch) => {
         type: actionTypes.FETCH_LOGIN_REQUEST_SUCCESS,
         response
     });
+};
+
+const handleNewUserResponse = (response) => {
+    fetchLogin(response.username, response.password);
 };

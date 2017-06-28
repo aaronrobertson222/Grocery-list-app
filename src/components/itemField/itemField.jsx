@@ -35,7 +35,7 @@ const ItemField = ({fields}) => {
 };
 
 ItemField.propTypes = {
-    fields: PropTypes.object
+    fields: PropTypes.array
 };
 
 export default ItemField;

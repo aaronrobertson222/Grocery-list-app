@@ -31,6 +31,17 @@ export function fetchLists() {
     };
 }
 
+export function fetchSharedLists() {
+    const promise = fetch(appConfig.USERS_SHARED_LISTS_PATH);
+
+    return {
+        onRequest: actionTypes.FETCH_USERS_SHARED_LISTS_TRIGGERED,
+        onSuccess: actionTypes.FETCH_USERS_SHARED_LISTS_SUCCESS,
+        onFailure: actionTypes.FETCH_USERS_SHARED_LISTS_FAILURE,
+        promise,
+    };
+}
+
 export function fetchListById(id) {
     const promise = fetch(`${appConfig.LIST_ID_PATH}${id}`, {
         method: 'POST',

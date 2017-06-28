@@ -1,6 +1,6 @@
 .user-info {
   background: #999;
-  padding: 10% 0;
+  padding: 5% 10%;
 }
 
 .username {
@@ -11,19 +11,34 @@
 .list-section {
   margin: auto;
   text-align: center;
+  width: 75%;
 }
 
 .list-section-header {
-  text-align: center;
+  text-align: left;
 }
 
 .lists-container {
+  margin: auto;
 }
 
 .list {
-
+  display: flex;
+  flex-direction: row;
+  background: #e0e0e0;
+  margin-bottom: 10px;
 }
 
 .list-link-item {
+  margin-bottom: 10px;
+}
 
+.list-name, .list-length {
+  display: inline-block;
+  width: 50%;
+}
+
+.users-lists, .users-shared-lists {
+  margin: auto;
+  text-align: center;
 }
