@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
 
         let sharedLists = this.props.sharedLists;
         let sharedListsElements = sharedLists.map((list, i) => (
-          <Link styleName="list-link-item" key={i} to={`/app/list/${lists[i].id}`}>
+          <Link styleName="list-link-item" key={i} to={`/app/list/${list.id}`}>
             <div styleName="list">
               <h3 styleName="list-name">
                 {list.listName}

@@ -24,19 +24,20 @@ class NewList extends React.Component {
         return (
           <div styleName="new-list-form">
             <form onSubmit={this.props.handleSubmit(this.formSubmitHandler.bind(this))}>
-              <div>
-                <label>List Name</label>
+              <div styleName="form-group">
+                <label styleName="form-label">List Name</label>
+                <br />
                 <Field name="listName" component="input" type="text" placeholder="List Name" styleName="form-input" required />
               </div>
-              <div>
-                <label>Items</label>
+              <div styleName="form-group">
+                <label styleName="form-label">Items</label>
                 <FieldArray name="items" component={ItemField} />
               </div>
-              <div>
-                <label>Users</label>
+              <div styleName="form-group">
+                <label styleName="form-label">Users</label>
                 <FieldArray name="listUsers" component={UserField} />
               </div>
-              <button type="submit">Submit List</button>
+              <button styleName="btn" type="submit">Submit List</button>
             </form>
           </div>
         );

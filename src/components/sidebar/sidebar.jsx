@@ -18,12 +18,12 @@ class Sidebar extends React.Component {
             <nav styleName="sidebar-nav">
               <ul styleName="sidebar-nav-list">
                 <li styleName="sidebar-nav-list-items">
-                  <Link to="/app">
-                    <p>Dashboard</p>
+                  <Link to="/app" styleName="nav-links">
+                    <p>My Dashboard</p>
                   </Link>
                 </li>
                 <li styleName="sidebar-nav-list-items">
-                  <Link to="/app/newlist">
+                  <Link to="/app/newlist" styleName="nav-links">
                     <p>New List</p>
                   </Link>
                 </li>

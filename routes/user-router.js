@@ -6,7 +6,7 @@ const path = require('path');
 const { SECRET, EXPIRATIONTIME } = require('../config/app.config');
 const { logger } = require('../config/logger.config');
 
-const {User} = require('../models');
+const { User } = require('../models');
 const router = express.Router();
 
 router.post('/', (req, res) => {
@@ -63,7 +63,8 @@ router.post('/', (req, res) => {
               firstName: firstName,
               lastName: lastName,
               joinedDate: Date.now()
-          })
+          });
+      })
           .then(user => {
               return res.status(201).json(user.apiRepr());
           })
@@ -71,7 +72,6 @@ router.post('/', (req, res) => {
               logger.error(err);
               return res.status(500).json({message: 'Internal Server Error'});
           });
-      });
 });
 
 router.post('/login', (req, res) => {

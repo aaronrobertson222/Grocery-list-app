@@ -44,11 +44,11 @@ Login.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     fetchLogin: PropTypes.func.isRequired,
     hideModal: PropTypes.func.isRequired,
-    isVisible: PropTypes.bool.isRequired
+    isVisible: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-    isVisible: state.modal.isVisible
+    isVisible: state.modal.isVisible,
 });
 
 export default connect(mapStateToProps, { fetchLogin, hideModal })(reduxForm({

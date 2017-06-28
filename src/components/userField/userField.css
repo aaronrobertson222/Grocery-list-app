@@ -1,0 +1,37 @@
+.user-field-wrapper {
+  list-style: none;
+  padding: 0;
+}
+
+.form-input {
+
+}
+
+.form-input-label {
+
+}
+
+.field-group {
+  
+}
+
+.btn {
+  background: #4776e6;
+  color: #FFF;
+  border: none;
+  border-radius: 3px;
+  padding: 10px;
+  font-size: 1.25em;
+}
+
+.blue {
+  background: #4776e6;
+}
+
+.red {
+  background: #e74c3c;
+}
+
+.btn:hover {
+  cursor: pointer;
+}

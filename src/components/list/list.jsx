@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
-import { fetchListById } from 'actions/index.actions';
+import { fetchListById, clearCurrentList, deleteList } from 'actions/index.actions';
 import styles from './list.css';
 
 import UserField from 'components/userField/userField';
@@ -20,7 +20,6 @@ class List extends React.Component {
         };
 
         this.toggleEditing = this.toggleEditing.bind(this);
-
     }
 
     componentWillMount() {
@@ -28,7 +27,7 @@ class List extends React.Component {
     }
 
     componentWillUnmount() {
-
+        this.props.clearCurrentList();
     }
 
     toggleEditing() {
@@ -44,28 +43,32 @@ class List extends React.Component {
 
         if (this.props.currentList) {
 
+            const deleteButton = (
+              <button type="button" onClick={() => this.props.deleteList(this.props.currentList.id)}>Delete List</button>
+            );
+
             const userField = (
-          <div>
-            <label>Users</label>
-            <FieldArray name="listUsers" component={UserField}/>
-          </div>
-        );
+              <div>
+                <label>Users</label>
+                <FieldArray name="listUsers" component={UserField}/>
+              </div>
+            );
 
             const editForm = (
-        <form>
-          <div>
-            <label>List Name</label>
-            <Field name="listName" component="input" value={this.props.currentList.listName} />
-          </div>
-          <div>
-            <label>Items</label>
-            <FieldArray name="items" component={ItemField} fields={this.props.currentList.items} />
-          </div>
-          {this.props.currentList.listOwner === this.props.user.id && userField}
-          <button type="submit">Update List</button>
-          <button type="button">Cancel</button>
-        </form>
-      );
+              <form>
+                <div>
+                  <label>List Name</label>
+                  <Field name="listName" component="input" />
+                </div>
+                <div>
+                  <label>Items</label>
+                  <FieldArray name="items" component={ItemField} />
+                </div>
+                {this.props.currentList.listOwner === this.props.user.id && userField}
+                <button type="submit">Update List</button>
+                <button type="button" onClick={this.toggleEditing}>Cancel</button>
+              </form>
+            );
 
             if (this.state.isEditing) {
                 return editForm;
@@ -101,6 +104,7 @@ class List extends React.Component {
                   </div>
                   <h2>Notes</h2>
                 </section>
+                {this.props.user.id === this.props.currentList.listOwner && deleteButton}
               </div>
                     );
                 }
@@ -114,13 +118,16 @@ List.propTypes = {
     match: PropTypes.object,
     currentList: PropTypes.object,
     user: PropTypes.object.isRequired,
+    clearCurrentList: PropTypes.func.isRequired,
+    deleteList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
     currentList: state.list.currentList,
     user: state.user.user,
+    initialValues: state.list.currentList,
 });
 
-export default connect(mapStateToProps, { fetchListById })(reduxForm({
+export default connect(mapStateToProps, { fetchListById, clearCurrentList, deleteList })(reduxForm({
     form: 'EditList',
 })(cssModules(List, styles)));

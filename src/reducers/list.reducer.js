@@ -37,6 +37,12 @@ export default function list(state = initialState, action) {
             currentList: action.response.list,
         };
     }
+    case actionTypes.CLEAR_CURRENT_LIST: {
+        return {
+            ...state,
+            currentList: initialState.currentList,
+        };
+    }
     default: {
         return state;
     }

@@ -23,16 +23,16 @@ export function createUser(username, password, firstName, lastName) {
     const promise = fetch(appConfig.USER_SIGNUP_PATH, {
         method: 'POST',
         body: JSON.stringify({
-            username,
-            password,
-            firstName,
-            lastName
+            username: username,
+            password: password,
+            firstName: firstName,
+            lastName: lastName
         })
     }, true);
 
     return {
         onRequest: actionTypes.CREATE_USER_REQUEST_TRIGGERED,
-        onSuccess: handleNewUserResponse,
+        onSuccess: actionTypes.CREATE_USER_REQUEST_SUCCESS,
         onFailure: actionTypes.CREATE_USER_REQUEST_FAILURE,
         promise,
     };
@@ -62,8 +62,4 @@ const handleLoginResponse = (response, dispatch) => {
         type: actionTypes.FETCH_LOGIN_REQUEST_SUCCESS,
         response
     });
-};
-
-const handleNewUserResponse = (response) => {
-    fetchLogin(response.username, response.password);
 };

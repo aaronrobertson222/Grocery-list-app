@@ -1,5 +1,5 @@
 .app-sidebar {
-  background: #666;
+  background: #4776E6;
   height: 100%;
   width: 100%;
   min-width: 200px;
@@ -22,4 +22,14 @@
 
 .sidebar-nav-list-items {
 
+}
+
+.nav-links {
+  color: #FFF;
+  text-decoration: none;
+  font-size: 1.3em;
+}
+
+.nav-links:hover {
+  color: #999;
 }

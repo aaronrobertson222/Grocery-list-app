@@ -57,3 +57,31 @@ export function fetchListById(id) {
         promise,
     };
 }
+
+export function clearCurrentList() {
+    return {
+        type: actionTypes.CLEAR_CURRENT_LIST,
+    };
+}
+
+export function deleteList(id) {
+    const promise = fetch(`${appConfig.LIST_ID_PATH}${id}`, {
+        method: 'DELETE'
+    });
+
+    return {
+        onRequest: actionTypes.DELETE_LIST_TRIGGERED,
+        onSuccess: handleListDelete,
+        onFailure: actionTypes.DELETE_LIST_FAILURE,
+        promise,
+    };
+}
+
+const handleListDelete = (response, dispatch) => {
+    
+
+    dispatch({
+        type: actionTypes.DELETE_LIST_SUCCESS,
+        response
+    });
+};

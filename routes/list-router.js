@@ -118,6 +118,19 @@ router.get('/shared',
                 });
             });
 
+router.delete('/id/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    List
+    .findOneAndRemove({_id: req.params.id})
+    .exec()
+    .then(() => {
+        return res.status(200).json({message: 'list successfully deleted'});
+    })
+    .catch(err => {
+        logger.error(err);
+        return res.status(500).json({message: 'internal server error occured'});
+    });
+});
+
 module.exports = {
     router
 };
