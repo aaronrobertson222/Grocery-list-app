@@ -131,6 +131,26 @@ router.delete('/id/:id', passport.authenticate('jwt', { session: false }), (req,
     });
 });
 
+
+router.put('/id/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+    const updatedList = req.body.list;
+
+    List
+    .findOneAndUpdate({_id: req.params.id}, updatedList)
+    .exec()
+    .then((list) => {
+        res.status(200).json({
+            message: 'List has been updated',
+            list: list.apiRepr()
+        });
+    })
+    .catch(err => {
+        logger.error(err);
+        res.status(500).json({messsage: 'Could not update list'});
+    });
+});
+
 module.exports = {
     router
 };

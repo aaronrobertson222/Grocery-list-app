@@ -66,7 +66,13 @@ router.post('/', (req, res) => {
           });
       })
           .then(user => {
-              return res.status(201).json(user.apiRepr());
+              const token = jwt.sign(user, SECRET);
+              return res.status(201).json({
+                  success: true,
+                  user: user.apiRepr(),
+                  token: 'JWT ' + token,
+                  tokenExpiration: new Date(Date.now() + EXPIRATIONTIME)
+              });
           })
           .catch(err => {
               logger.error(err);

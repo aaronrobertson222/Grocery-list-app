@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 
 import styles from './landing.layout.css';
 
-import { fetchLogin } from 'actions/index.actions';
+import { fetchLogin, fetchUsersInfo } from 'actions/index.actions';
 
 import Navbar from 'components/navbar/navbar';
 import Hero from 'components/hero/hero';
@@ -15,6 +15,7 @@ import Login from 'components/login/login';
 import Signup from 'components/signup/signup';
 
 class LandingLayout extends React.Component {
+
     render() {
         if (this.props.user) {
             return (
@@ -39,6 +40,7 @@ class LandingLayout extends React.Component {
 
 LandingLayout.propTypes = {
     fetchLogin: PropTypes.func.isRequired,
+    fetchUsersInfo: PropTypes.func.isRequired,
     isVisible: PropTypes.bool.isRequired,
     user: PropTypes.object
 };
@@ -49,5 +51,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-    fetchLogin
+    fetchLogin,
+    fetchUsersInfo,
 })(cssModules(LandingLayout, styles, { allowMultiple: true }));

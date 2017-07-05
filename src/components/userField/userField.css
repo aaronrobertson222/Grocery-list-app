@@ -4,15 +4,23 @@
 }
 
 .form-input {
-
+  font-size: 1.2em;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #999;
+  margin: 10px 10px;
 }
 
 .form-input-label {
-
+  font-size: 1.25em;
+  margin-right: 5px;
 }
 
 .field-group {
-  
+  background: #e0e0e0;
+  padding: 10px;
+  margin: 0 0 10px 0;
+  border-radius: 3px;
 }
 
 .btn {
@@ -34,4 +42,9 @@
 
 .btn:hover {
   cursor: pointer;
+}
+
+.button-icon {
+  vertical-align: middle;
+  padding: 0 3px;
 }

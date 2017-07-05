@@ -16,15 +16,19 @@ export default function user(state = initialState, action) {
     case actionTypes.CREATE_USER_REQUEST_SUCCESS: {
         return {
             ...state,
-            username: action.response.username,
-            firstName: action.response.firstName,
-            lastName: action.response.lastName,
+            user: action.response.user,
         };
     }
     case actionTypes.FETCH_USER_INFO_SUCCESS: {
         return {
             ...state,
             user: action.response.user,
+        };
+    }
+    case actionTypes.CLEAR_CURRENT_USER: {
+        return {
+            ...state,
+            user: initialState.user,
         };
     }
     default: {

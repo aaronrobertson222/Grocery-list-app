@@ -1,9 +1,13 @@
+/** RESPONSIVE **/
 .app-sidebar {
   background: #4776E6;
   height: 100%;
   width: 100%;
   min-width: 200px;
   max-width: 400px;
+  position: relative;
+  margin-left: -100%;
+  transition: margin .3s ease-in-out;
 }
 
 .sidebar-title {
@@ -32,4 +36,32 @@
 
 .nav-links:hover {
   color: #999;
+}
+
+.sidebar-button {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: none;
+  border-bottom: 3px solid #4776E6;
+  border-top: 3px solid #4776E6;
+  border-right: 3px solid #4776E6;
+  border-left: none;
+  top: 0;
+  right: -50px;
+}
+
+.isVisible {
+  margin-left: 0;
+}
+
+/** DESKTOP **/
+@media only screen and (min-width: 720px) {
+  .sidebar-button {
+    display: none;
+  }
+
+  .app-sidebar {
+    margin: 0;
+  }
 }

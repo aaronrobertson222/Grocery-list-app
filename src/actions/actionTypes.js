@@ -37,7 +37,7 @@ export const FETCH_LIST_BY_ID_TRIGGERED = 'FETCH_LIST_BY_ID_TRIGGERED';
 export const FETCH_LIST_BY_ID_SUCCESS = 'FETCH_LIST_BY_ID_SUCCESS';
 export const FETCH_LIST_BY_ID_FAILURE = 'FETCH_LIST_BY_ID_FAILURE';
 
-// clear current project
+// clear current list
 export const CLEAR_CURRENT_LIST = 'CLEAR_CURRENT_LIST';
 
 // delete project
@@ -49,3 +49,6 @@ export const DELETE_LIST_FAILURE = 'DELETE_LIST_FAILURE';
 export const UPDATE_LIST_TRIGGERED = 'UPDATE_LIST_TRIGGERED';
 export const UPDATE_LIST_SUCCESS = 'UPDATE_LIST_SUCCESS';
 export const UPDATE_LIST_FAILURE = 'UPDATE_LIST_FAILURE';
+
+// logout clear user
+export const CLEAR_CURRENT_USER = 'CLEAR_CURRENT_USER';

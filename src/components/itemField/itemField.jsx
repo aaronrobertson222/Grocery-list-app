@@ -11,13 +11,14 @@ const ItemField = ({fields}) => {
       <ul styleName="item-field-wrapper">
         {fields.map((item, index) => (
             <li styleName="field-group" key={index}>
-              <label styleName="form-input-label">Item Name</label>
+              <label styleName="form-input-label">Item</label>
               <Field
                 name={`${item}.name`}
                 type="text"
                 component="input"
                 label="Item Name"
                 styleName="form-input"
+                required
               />
             <label styleName="form-input-label">Qty.</label>
               <Field
@@ -25,15 +26,16 @@ const ItemField = ({fields}) => {
                 type="text"
                 component="input"
                 label="Item Quantiy"
-                styleName="form-input"
+                styleName="form-input quantity"
+                required
               />
             <button styleName="btn red" onClick={() => fields.remove(index)}>
-                D
-              </button>
+              <img styleName="button-icon" src="../../assets/images/icons/delete.png" />
+            </button>
             </li>
         ))}
         <li styleName="add-field-btn-wrapper">
-          <button styleName="btn blue" type="button" onClick={() => fields.push()}>Add Item</button>
+          <button styleName="btn blue" type="button" onClick={() => fields.push()}><span>Add Item</span><img styleName="button-icon" src="../../assets/images/icons/add.png" /></button>
         </li>
       </ul>
     );

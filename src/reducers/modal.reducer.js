@@ -12,7 +12,6 @@ export default function modal(state = initialState, action) {
             isVisible: true
         };
     }
-
     case actionTypes.HIDE_MODAL: {
         return initialState;
     }

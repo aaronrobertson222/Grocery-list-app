@@ -46,8 +46,6 @@ class Dashboard extends React.Component {
           <div>
             <section styleName="user-info">
               <h1 styleName="username">{this.props.user.username}</h1>
-              <p styleName="users-lists">{this.props.lists.length} owned lists</p>
-              <p styleName="users-shared-lists">{this.props.sharedLists.length} shared lists</p>
             </section>
             <section styleName="list-section">
               <header styleName="list-section-header">

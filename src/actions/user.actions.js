@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import fetch from 'httpService';
 import appConfig from '../config/appConfig';
+//import history from '../history';
 
 export function fetchLogin (username, password) {
     const promise = fetch(appConfig.USER_LOGIN_PATH, {
@@ -32,7 +33,7 @@ export function createUser(username, password, firstName, lastName) {
 
     return {
         onRequest: actionTypes.CREATE_USER_REQUEST_TRIGGERED,
-        onSuccess: actionTypes.CREATE_USER_REQUEST_SUCCESS,
+        onSuccess: handleCreateUserResponse,
         onFailure: actionTypes.CREATE_USER_REQUEST_FAILURE,
         promise,
     };
@@ -49,6 +50,16 @@ export function fetchUsersInfo() {
     };
 }
 
+export function clearCurrentUser() {
+
+    sessionStorage.removeItem(appConfig.TOKEN_CONTENT_KEY);
+    sessionStorage.removeItem(appConfig.TOKEN_EXP);
+
+    return {
+        type: actionTypes.CLEAR_CURRENT_USER,
+    };
+}
+
 const handleLoginResponse = (response, dispatch) => {
     if (appConfig.ENV !== 'testing') {
         sessionStorage.removeItem(appConfig.TOKEN_CONTENT_KEY);
@@ -62,4 +73,21 @@ const handleLoginResponse = (response, dispatch) => {
         type: actionTypes.FETCH_LOGIN_REQUEST_SUCCESS,
         response
     });
+};
+
+const handleCreateUserResponse = (response, dispatch) => {
+
+    if (appConfig.ENV !== 'testing') {
+        sessionStorage.removeItem(appConfig.TOKEN_CONTENT_KEY);
+        sessionStorage.setItem(appConfig.TOKEN_CONTENT_KEY, response.token);
+
+        sessionStorage.removeItem(appConfig.TOKEN_EXP);
+        sessionStorage.setItem(appConfig.TOKEN_EXP, response.tokenExpiration);
+    }
+
+    dispatch({
+        type: actionTypes.CREATE_USER_REQUEST_SUCCESS,
+        response
+    });
+
 };

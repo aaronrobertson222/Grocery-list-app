@@ -20,6 +20,11 @@
   font-size: 1.25em;
 }
 
+.button-icon {
+  vertical-align: middle;
+  padding: 0 3px;
+}
+
 .blue {
   background: #4776e6;
 }
@@ -40,10 +45,19 @@
 }
 
 .form-input {
-  margin-right: 10px;
+  font-size: 1.2em;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #999;
+  margin: 10px 10px;
+}
+
+.quantity {
+  width: 50px;
 }
 
 .form-input-label {
   font-size: 1.25em;
   margin-right: 5px;
+  width: 75px;
 }

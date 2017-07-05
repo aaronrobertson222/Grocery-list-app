@@ -1,12 +1,16 @@
 import React from 'react';
 import cssModules from 'react-css-modules';
-import { connect, dispatch } from 'react-redux'; //eslint-disable-line
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { showModal } from 'actions/index.actions';
+import { showModal, hideModal } from 'actions/index.actions';
 import styles from './navbar.css';
 
 class Navbar extends React.Component {
+
+    componentWillUnmount() {
+        this.props.hideModal();
+    }
 
     handleShowModal(event) {
         event.preventDefault();
@@ -34,9 +38,9 @@ class Navbar extends React.Component {
     }
 }
 
-
 Navbar.propTypes = {
-    showModal: PropTypes.func.isRequired
+    showModal: PropTypes.func.isRequired,
+    hideModal: PropTypes.func.isRequired,
 };
 
-export default connect(null, { showModal })(cssModules(Navbar, styles, { allowMultiple: true }));
+export default connect(null, { showModal, hideModal })(cssModules(Navbar, styles, { allowMultiple: true }));

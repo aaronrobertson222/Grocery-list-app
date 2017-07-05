@@ -1,11 +1,12 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
   Redirect
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import history from '../../history';
 
 import { fetchUsersInfo } from 'actions/index.actions';
 
@@ -27,7 +28,7 @@ class App extends React.Component {
 
     render() {
         return (
-          <Router>
+          <Router history={history}>
             <div>
               <Route exact path="/" render={(props) => (
                   <LandingLayout {...props}>

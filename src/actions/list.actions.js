@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import fetch from 'httpService';
 import appConfig from '../config/appConfig';
+import history from '../history';
 
 export function createList(listName, items, listUsers) {
     const promise = fetch(appConfig.NEW_LIST_PATH, {
@@ -14,7 +15,7 @@ export function createList(listName, items, listUsers) {
 
     return {
         onRequest: actionTypes.CREATE_LIST_TRIGGERED,
-        onSuccess: actionTypes.CREATE_LIST_SUCCESS,
+        onSuccess: handleListCreation,
         onFailure: actionTypes.CREATE_LIST_FAILURE,
         promise,
     };
@@ -77,11 +78,38 @@ export function deleteList(id) {
     };
 }
 
+export function updateList(id, list) {
+    const promise = fetch(`${appConfig.LIST_ID_PATH}${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            list: list,
+        }),
+    });
+
+    return {
+        onRequest: actionTypes.UPDATE_LIST_TRIGGERED,
+        onSuccess: actionTypes.UPDATE_LIST_SUCCESS,
+        onFailure: actionTypes.UPDATE_LIST_FAILURE,
+        promise,
+    };
+}
+
 const handleListDelete = (response, dispatch) => {
-    
+
+    history.push('/app');
 
     dispatch({
         type: actionTypes.DELETE_LIST_SUCCESS,
+        response
+    });
+};
+
+const handleListCreation = (response, dispatch) => {
+
+    history.push(`/app/list/${response.list.id}`);
+
+    dispatch({
+        type: actionTypes.CREATE_LIST_SUCCESS,
         response
     });
 };

@@ -43,6 +43,12 @@ export default function list(state = initialState, action) {
             currentList: initialState.currentList,
         };
     }
+    case actionTypes.UPDATE_LIST_SUCCESS: {
+        return {
+            ...state,
+            currentList: action.response.list,
+        };
+    }
     default: {
         return state;
     }
