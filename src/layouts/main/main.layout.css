@@ -1,12 +1,24 @@
+/** MOBILE **/
 .sidebar {
-  width: 20%;
+  width: 80%;
   display: inline-block;
   height: 100vh;
   position: fixed;
 }
 
 .main {
-  margin-left: 20%;
   display: inline-block;
-  width: 80%;
+  width: 100%;
+}
+
+/** DESKTOP **/
+@media only screen and (min-width: 720px) {
+  .sidebar {
+    width: 20%;
+  }
+
+  .main {
+    margin-left: 20%;
+    width: 80%;
+  }
 }

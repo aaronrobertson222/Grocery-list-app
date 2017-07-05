@@ -14,9 +14,18 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    firstName: {type: String, default: ''},
-    lastName: {type: String, default: ''},
-    joinedDate: {type: Date, required: true}
+    firstName: {
+        type: String,
+        default: ''
+    },
+    lastName: {
+        type: String,
+        default: ''
+    },
+    joinedDate: {
+        type: Date,
+        required: true
+    }
 });
 
 UserSchema.methods.apiRepr = function() {
@@ -28,8 +37,13 @@ UserSchema.methods.apiRepr = function() {
     };
 };
 
-UserSchema.methods.validatePassword = function(password) {
-    return bcrypt.compare(password, this.password);
+UserSchema.methods.validatePassword = function(password, cb) {
+    return bcrypt.compare(password, this.password, function(err, isMatch) {
+        if (err) {
+            return cb(err);
+        }
+        cb(null, isMatch);
+    });
 };
 
 UserSchema.statics.hashPassword = function(password) {

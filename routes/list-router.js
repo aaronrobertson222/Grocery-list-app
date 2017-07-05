@@ -40,7 +40,7 @@ router.post('/',
       });
   });
 
-router.get('/id/:id',
+router.post('/id/:id',
   passport.authenticate('jwt', {
       session: false
   }), (req, res) => {
@@ -85,15 +85,16 @@ router.get('/',
       .then(lists => {
           return res.status(200).json({
               lists: lists.map(list => list.apiRepr())
-          })
-          .catch(err => {
-              logger.error(err);
-              return res.status(500).json({
-                  message: 'Oops! internal server error'
-              });
+          });
+      })
+      .catch(err => {
+          logger.error(err);
+          return res.status(500).json({
+              message: 'Oops! internal server error'
           });
       });
   });
+
 
 router.get('/shared',
             passport.authenticate('jwt', {
@@ -116,6 +117,39 @@ router.get('/shared',
                   });
                 });
             });
+
+router.delete('/id/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    List
+    .findOneAndRemove({_id: req.params.id})
+    .exec()
+    .then(() => {
+        return res.status(200).json({message: 'list successfully deleted'});
+    })
+    .catch(err => {
+        logger.error(err);
+        return res.status(500).json({message: 'internal server error occured'});
+    });
+});
+
+
+router.put('/id/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+    const updatedList = req.body.list;
+
+    List
+    .findOneAndUpdate({_id: req.params.id}, updatedList)
+    .exec()
+    .then((list) => {
+        res.status(200).json({
+            message: 'List has been updated',
+            list: list.apiRepr()
+        });
+    })
+    .catch(err => {
+        logger.error(err);
+        res.status(500).json({messsage: 'Could not update list'});
+    });
+});
 
 module.exports = {
     router
