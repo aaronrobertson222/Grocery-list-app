@@ -18,12 +18,12 @@ const UserField = ({fields}) => {
               styleName="form-input"
             />
           <button styleName="btn red"type="button" onClick={() => fields.remove(index)}>
-            <img styleName="button-icon" src="../../assets/images/icons/delete.png" />
+            <img styleName="button-icon" src={require('images/icons/delete.png')} />
           </button>
           </li>
         ))}
         <li>
-          <button styleName="btn blue" type="button" onClick={() =>  fields.push()}><span>Add User</span><img styleName="button-icon" src="../../assets/images/icons/add.png" /></button>
+          <button styleName="btn blue" type="button" onClick={() =>  fields.push()}><span>Add User</span><img styleName="button-icon" src={require('images/icons/add.png')} /></button>
         </li>
       </ul>
     );

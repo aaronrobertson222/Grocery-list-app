@@ -30,12 +30,12 @@ const ItemField = ({fields}) => {
                 required
               />
             <button styleName="btn red" onClick={() => fields.remove(index)}>
-              <img styleName="button-icon" src="../../assets/images/icons/delete.png" />
+              <img styleName="button-icon" src={require('images/icons/delete.png')} />
             </button>
             </li>
         ))}
         <li styleName="add-field-btn-wrapper">
-          <button styleName="btn blue" type="button" onClick={() => fields.push()}><span>Add Item</span><img styleName="button-icon" src="../../assets/images/icons/add.png" /></button>
+          <button styleName="btn blue" type="button" onClick={() => fields.push()}><span>Add Item</span><img styleName="button-icon" src={require('images/icons/add.png')}/></button>
         </li>
       </ul>
     );
