@@ -5,6 +5,7 @@ const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const morgan = require('morgan');
+const path = require('path');
 
 const { logger } = require('./config/logger.config');
 const { DATABASE_URL, PORT, SECRET } = require('./config/app.config');
