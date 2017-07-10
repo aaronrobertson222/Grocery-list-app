@@ -1,7 +1,7 @@
-.list-header-container {
-  width: 100%;
+/** RESPONSIVE **/
+.list-info {
   background: #999;
-  padding: 5% 0;
+  padding: 10% 0;
 }
 
 .list-header {
@@ -9,6 +9,106 @@
   text-align: center;
 }
 
+.list-edit-button {
+  display: table;
+  margin: auto;
+}
+
 .list-container {
+  width: 90%;
+  margin: 20px auto;
+}
+
+.list-item {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  padding: 5px 10px;
   text-align: center;
 }
+
+.list-item:nth-child(odd) {
+  background: rgba(71, 118, 230, .2);
+  border-radius: 3px;
+}
+
+.list-item-name, .list-item-quantity {
+  font-size: 20px;
+  width: 40%;
+}
+
+.edit-list-button {
+  font-size: 20px;
+  margin: auto;
+  border: none;
+  background: none;
+  color: #4776e6;
+}
+
+.button {
+  cursor: pointer;
+  padding: 5px 10px;
+  display: block;
+  border: none;
+}
+
+.delete-list-button {
+  background: #e74c3c;
+  border-radius: 3px;
+  font-size: 1.2em;
+  margin: auto;
+  color: white;
+}
+
+/** EDIT FROM **/
+.edit-form {
+  width: 90%;
+  margin: 50px auto;
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-label {
+  font-size: 1.3em;
+}
+
+.form-input {
+  font-size: 1.2em;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #999;
+  margin: 10px 0;
+  width: 90%;
+}
+
+.form-options {
+  margin: auto;
+  display: table;
+}
+
+.update-button, .cancel-button {
+  display: inline-block;
+  margin: 0 5px;
+  font-size: 1.1em;
+  border-radius: 3px;
+  color: white;
+  padding: 10px;
+}
+
+.update-button {
+  background: #4776e6;
+}
+
+.cancel-button {
+  background: #e74c3c;
+}
+
+.button-icon {
+  vertical-align: middle;
+  padding: 0 3px;
+}
+
+/** DEKSTOP **/

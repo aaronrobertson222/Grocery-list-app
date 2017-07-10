@@ -7,8 +7,7 @@ import styles from './main.layout.css';
 import Sidebar from 'components/sidebar/sidebar';
 
 
-const MainLayout = (props) => {
-    return (
+const MainLayout = (props) => (
           <div className="container">
             <div styleName="sidebar">
               <Sidebar />
@@ -17,8 +16,7 @@ const MainLayout = (props) => {
               {props.children}
             </div>
           </div>
-    );
-};
+);
 
 export default cssModules(MainLayout, styles);
 

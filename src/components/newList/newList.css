@@ -1,0 +1,37 @@
+.new-list-form {
+  width: 90%;
+  margin: 50px auto;
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-input {
+  font-size: 1.2em;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #999;
+  margin: 10px 0;
+  width: 90%;
+}
+
+.form-label {
+  font-size: 1.3em;
+}
+
+.btn {
+    color: #FFF;
+    background: #4776e6;
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    font-size: 1.25em;
+    display: block;
+    margin: auto;
+}
+
+.btn:hover {
+  cursor: pointer;
+}

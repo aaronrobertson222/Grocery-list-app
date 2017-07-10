@@ -1,7 +1,12 @@
 const express = require('express');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const path = require('path');
 
-const {User} = require('../models');
+const { SECRET, EXPIRATIONTIME } = require('../config/app.config');
+const { logger } = require('../config/logger.config');
+
+const { User } = require('../models');
 const router = express.Router();
 
 router.post('/', (req, res) => {
@@ -41,31 +46,38 @@ router.post('/', (req, res) => {
     }
 
     return User
-    .find({username})
-    .count()
-    .exec()
-    .then(count => {
-        if (count > 0) {
-            return res.status(422).json({message: 'Username is already taken.'});
-        }
-        return User.hashPassword(password);
-    })
-    .then(hash => {
-        return User
-        .create({
-            username: username,
-            password: hash,
-            firstName: firstName,
-            lastName: lastName,
-            joinedDate: Date.now()
-        });
-    })
-    .then(user => {
-        return res.status(201).json(user.apiRepr());
-    })
-    .catch(err => {
-        return res.status(500).sendFile(path.join(__dirname, '../public', 'error.html'));
-    });
+      .find({username})
+      .count()
+      .exec()
+      .then(count => {
+          if (count > 0) {
+              return res.status(422).json({message: 'username already taken'});
+          }
+          return User.hashPassword(password);
+      })
+      .then(hash => {
+          return User
+          .create({
+              username: username,
+              password: hash,
+              firstName: firstName,
+              lastName: lastName,
+              joinedDate: Date.now()
+          });
+      })
+          .then(user => {
+              const token = jwt.sign(user, SECRET);
+              return res.status(201).json({
+                  success: true,
+                  user: user.apiRepr(),
+                  token: 'JWT ' + token,
+                  tokenExpiration: new Date(Date.now() + EXPIRATIONTIME)
+              });
+          })
+          .catch(err => {
+              logger.error(err);
+              return res.status(500).json({message: 'Internal Server Error'});
+          });
 });
 
 router.post('/login', (req, res) => {
@@ -74,25 +86,32 @@ router.post('/login', (req, res) => {
         return res.status(400).json({message: 'missing field in body'});
     }
     User
-      .findOne({username: username})
-      .exec()
-      .then((_user) => {
-          let user = _user;
-          if (!user) {
-              return res.status(404).json({message: 'Incorrect username or password.'});
-          }
-          return user.validatePassword(password);
-      })
-      .then(isValid => {
-          if (!isValid) {
-              return res.status(400).json({message: 'Incorrect username or password.'});
-          } else {
+    .findOne({username: username}, function(err, user) {
+        if (err) {
+            return res.status(500).json({message: 'Internal Server error'});
+        }
+        if (!user) {
+            return res.status(404).json({message: 'Incorrect Username'});
+        } else {
+            user.validatePassword(password, function(err, isMatch) {
+                if (isMatch && !err) {
+                    const token = jwt.sign(user, SECRET);
+                    return res.status(200).json({
+                        success: true,
+                        token: 'JWT ' + token,
+                        tokenExpiration: new Date(Date.now() + EXPIRATIONTIME),
+                        user: user.apiRepr()
+                    });
+                } else {
+                    res.status(401).json({message: 'authentication failed'});
+                }
+            });
+        }
+    });
+});
 
-          }
-      })
-      .catch(err => {
-          return res.status(500).json({message: 'Internal server error. Oops!'});
-      });
+router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
+    res.status(200).json({user: req.user.apiRepr()});
 });
 
 module.exports = { router };
