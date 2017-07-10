@@ -44,12 +44,16 @@
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+<<<<<<< HEAD
     "redux": "^3.6.0",
     "redux-form": "^6.8.0",
     "redux-thunk": "^2.2.0",
     "winston": "^2.3.1",
     "morgan": "^1.8.1",
     "parallelshell": "^2.0.0"
+=======
+    "winston": "^2.3.1"
+>>>>>>> origin/development
   },
   "devDependencies": {
     "autoprefixer": "^7.1.0",
