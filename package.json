@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf ./build/*",
-    "start": "parallelshell 'npm run clean' 'cross-env NODE_ENV=development webpack-dev-server -d --history-api-fallback --progress --colors' 'nodemon index.js'",
+    "start-dev": "parallelshell 'npm run clean' 'cross-env NODE_ENV=development webpack-dev-server -d --history-api-fallback --progress --colors' 'nodemon index.js'",
+    "start": "cross-env NODE_ENV=production node index.js",
     "lint": "cross-env NODE_ENV=development eslint --ext .js --ext .jsx src/ || exit 0",
     "test-client": "jest src/",
-    "test-server": "mocha test/"
+    "test-server": "mocha test/",
+    "build": "npm run clean && cross-env NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
@@ -45,7 +47,9 @@
     "redux": "^3.6.0",
     "redux-form": "^6.8.0",
     "redux-thunk": "^2.2.0",
-    "winston": "^2.3.1"
+    "winston": "^2.3.1",
+    "morgan": "^1.8.1",
+    "parallelshell": "^2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.0",
@@ -75,14 +79,13 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "faker": "^4.1.0",
     "file-loader": "^0.11.1",
+    "html-loader": "^0.4.5",
     "html-webpack-plugin": "^2.28.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^20.0.4",
     "jest-css-modules": "^1.1.0",
     "mocha": "^3.4.2",
-    "morgan": "^1.8.1",
     "nodemon": "^1.11.0",
-    "parallelshell": "^2.0.0",
     "react-test-renderer": "^15.5.4",
     "style-loader": "^0.17.0",
     "url-loader": "^0.5.8",

@@ -34,9 +34,7 @@ const plugins = [
   }),
   new webpack.NamedModulesPlugin(),
   new HtmlWebpackPlugin({
-    template: path.join(srcPath, 'index.html'),
-    path: buildPath,
-    filename: 'index.html',
+    template: srcPath + '/index.html'
   }),
   new webpack.LoaderOptionsPlugin({
     options: {
@@ -55,6 +53,12 @@ const plugins = [
 
 const rules = [
   {
+    test: /\.html$/,
+    use: [
+      'html-loader',
+    ],
+  },
+  {
     test: /\.(js|jsx)$/,
     exclude: /node_modules/,
     use: [
@@ -64,8 +68,7 @@ const rules = [
   },
   {
     test: /\.(png|gif|jpg|svg)$/,
-    include: imgPath,
-    use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]',
+    use: ['url-loader?limit=20480&name=assets/[name]-[hash].[ext]'],
   },
 ];
 
@@ -100,6 +103,7 @@ if (isProduction) {
     ]
   }
  );
+
 } else {
   plugins.push(
     new webpack.HotModuleReplacementPlugin()
@@ -118,7 +122,7 @@ if (isProduction) {
 
 module.exports = {
   entry: {
-    js: 'index.js',
+    js: path.join(srcPath, 'index.js'),
     css: path.join(srcPath, 'assets/styles/global.css')
   },
   context: srcPath,
@@ -143,7 +147,7 @@ module.exports = {
   },
   output: {
     path: buildPath,
-    publicPath: '/',
+    publicPath: '',
     filename: '[name]-[hash].js',
   },
   devtool: isProduction ? false : 'source-map',
