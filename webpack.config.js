@@ -4,7 +4,7 @@ const path = require('path');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv !== 'development';
-const testing = nodeEnv === 'testing' || 'false';
+const testing = nodeEnv === 'testing' || false;
 
 const buildPath = path.join(__dirname, './build/');
 const srcPath = path.join(__dirname, './src/');
