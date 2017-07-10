@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf ./build/*",
     "start-dev": "parallelshell 'npm run clean' 'cross-env NODE_ENV=development webpack-dev-server -d --history-api-fallback --progress --colors' 'nodemon index.js'",
-    "start": "parallelshell 'npm run build' 'node index.js'",
+    "start": "cross-env NODE_ENV=production node index.js",
     "lint": "cross-env NODE_ENV=development eslint --ext .js --ext .jsx src/ || exit 0",
     "test-client": "jest src/",
     "test-server": "mocha test/",
