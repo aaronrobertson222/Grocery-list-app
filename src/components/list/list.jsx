@@ -52,7 +52,7 @@ class List extends React.Component {
         if (this.props.currentList) {
 
             const deleteButton = (
-              <button styleName="delete-list-button button" type="button" onClick={() => this.props.deleteList(this.props.currentList.id)}><span>Delete List</span><img styleName="button-icon" alt="delete" src="../../assets/images/icons/delete.png"/></button>
+              <button styleName="delete-list-button button" type="button" onClick={() => this.props.deleteList(this.props.currentList.id)}><span>Delete List</span><img styleName="button-icon" alt="delete" src={require('images/icons/delete.png')}/></button>
             );
 
             const userField = (
