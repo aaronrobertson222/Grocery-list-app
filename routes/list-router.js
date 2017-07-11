@@ -6,7 +6,8 @@ const {
 } = require('../config/logger.config');
 
 const {
-  List
+  List,
+  User
 } = require('../models');
 
 const router = express.Router();
@@ -23,6 +24,19 @@ router.post('/',
           items: req.body.items,
           listUsers: req.body.listUsers
       };
+
+      if (newList.listUsers) {
+          newList.listUsers.forEach((listUser) => {
+              User.find({username: listUser})
+              .count()
+              .exec()
+              .then((count) => {
+                  if (count === 0) {
+                      return res.status(404).json({message: 'Invalid List User'});
+                  }
+              });
+          });
+      }
 
       return List
       .create(newList)
@@ -135,6 +149,19 @@ router.delete('/id/:id', passport.authenticate('jwt', { session: false }), (req,
 router.put('/id/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
 
     const updatedList = req.body.list;
+
+    if (updatedList.listUsers) {
+        updatedList.listUsers.forEach((listUser) => {
+            User.find({username: listUser})
+            .count()
+            .exec()
+            .then((count) => {
+                if (count === 0) {
+                    return res.status(404).json({message: 'Invalid List User'});
+                }
+            });
+        });
+    }
 
     List
     .findOneAndUpdate({_id: req.params.id}, updatedList)

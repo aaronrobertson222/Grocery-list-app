@@ -17,6 +17,7 @@ class Login extends React.Component {
     }
 
     render() {
+        const error = this.props.error;
         return (
             <div styleName="modal-wrapper">
                 <button styleName="close-modal-button" onClick={this.props.hideModal.bind(this)}>&times;</button>
@@ -25,7 +26,7 @@ class Login extends React.Component {
                     <div styleName="form-group">
                         <label htmlFor="username" styleName="form-input-label">Username</label>
                         <br />
-                        <Field name="username" component="input" type="text" placeholder="password" styleName="form-input" required />
+                        <Field name="username" component="input" type="text" placeholder="username" styleName="form-input" required />
                     </div>
                     <div styleName="form-group">
                         <label htmlFor="password" styleName="form-input-label">Password</label>
@@ -33,7 +34,8 @@ class Login extends React.Component {
                         <Field name="password" component="input" type="password" placeholder="password" styleName="form-input" required />
                     </div>
                     <button type="submit" styleName="form-submit-button">Login</button>
-                    <p styleName="demo-account-section"><strong>Demo account info:</strong> <br /> Username: DemoUser <br /> Password: Password</p>
+                    <p>{error}</p>
+                    <p styleName="demo-account-section">Demo Username: DemoUser <br /> Demo Password: Password</p>
                 </form>
             </div>
         );
@@ -45,10 +47,12 @@ Login.propTypes = {
     fetchLogin: PropTypes.func.isRequired,
     hideModal: PropTypes.func.isRequired,
     isVisible: PropTypes.bool.isRequired,
+    error: PropTypes.string
 };
 
 const mapStateToProps = state => ({
     isVisible: state.modal.isVisible,
+    error: state.user.error,
 });
 
 export default connect(mapStateToProps, { fetchLogin, hideModal })(reduxForm({

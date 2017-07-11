@@ -56,7 +56,7 @@ class Sidebar extends React.Component {
                 </li>
               </ul>
             </nav>
-            <button styleName="sidebar-button" onClick={this.toggleSidebar}>T</button>
+            <button styleName="sidebar-button" onClick={this.toggleSidebar}><img src={require('images/icons/menu.png')} alt="menu" /></button>
         </div>
         );
     }

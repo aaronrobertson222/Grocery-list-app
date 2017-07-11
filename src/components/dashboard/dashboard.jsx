@@ -15,22 +15,23 @@ class Dashboard extends React.Component {
 
     render() {
 
-        let lists = this.props.lists;
-        let listElements = [];
-        for (let i = 0; i < lists.length; i++) {
-            listElements.push(
-              <Link styleName="list-link-item" key={i} to={`/app/list/${lists[i].id}`}>
+
+
+        let lists = this.props.lists || [];
+        const listElements = lists.map((list, i) => (
+              <Link styleName="list-link-item" key={i} to={`/app/list/${list.id}`}>
                 <div styleName="list">
                   <h3 styleName="list-name">
-                    {this.props.lists[i].listName}
+                    {list.listName}
                   </h3>
-                  <p styleName="list-length">{this.props.lists[i].items.length} items</p>
+                  <p styleName="list-length">{list.items.length} items</p>
                 </div>
               </Link>
-            );
-        }
+            ));
 
-        let sharedLists = this.props.sharedLists;
+
+
+        let sharedLists = this.props.sharedLists || [];
         let sharedListsElements = sharedLists.map((list, i) => (
           <Link styleName="list-link-item" key={i} to={`/app/list/${list.id}`}>
             <div styleName="list">

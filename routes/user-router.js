@@ -91,7 +91,7 @@ router.post('/login', (req, res) => {
             return res.status(500).json({message: 'Internal Server error'});
         }
         if (!user) {
-            return res.status(404).json({message: 'Incorrect Username'});
+            return res.status(404).json({message: 'Incorrect Username or Password'});
         } else {
             user.validatePassword(password, function(err, isMatch) {
                 if (isMatch && !err) {
@@ -103,7 +103,7 @@ router.post('/login', (req, res) => {
                         user: user.apiRepr()
                     });
                 } else {
-                    res.status(401).json({message: 'authentication failed'});
+                    res.status(401).json({message: 'Incorrect Username or Password'});
                 }
             });
         }

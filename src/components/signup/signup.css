@@ -2,7 +2,7 @@
   margin: auto;
   display: block;
   width: 300px;
-  padding: 20px;
+  padding: 20px 20px 100px 20px;
 }
 
 .form {
@@ -21,14 +21,30 @@
 
 .form-input-label {
   margin-bottom: 10px;
+  font-size: 1.1em;
 }
 
 .form-input {
-  width: 290px;
-  height: 25px;
+  width: 98%;
+  height: 40px;
+  margin: 10px 0;
+  font-size: 1.1em;
 }
 
 .form-submit-button {
-  margin: auto;
+  margin: 10px auto;
   display: block;
+  background: none;
+  border: 3px solid #4776e6;
+  border-radius: 3px;
+  padding: 10px 15px;
+  font-size: 1.1em;
+  color: #4776e6;
+  width: 100%;
+}
+
+.form-submit-button:hover {
+  cursor: pointer;
+  background: #4776e6;
+  color: #FFF;
 }

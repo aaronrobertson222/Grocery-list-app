@@ -15,7 +15,7 @@ export function fetchLogin (username, password) {
     return {
         onRequest: actionTypes.FETCH_LOGIN_REQUEST_TRIGGERED,
         onSuccess: handleLoginResponse,
-        onFailure: actionTypes.FETCH_LOGIN_REQUEST_FAILURE,
+        onFailure: handleLoginError,
         promise,
     };
 }
@@ -90,4 +90,11 @@ const handleCreateUserResponse = (response, dispatch) => {
         response
     });
 
+};
+
+const handleLoginError = (response, dispatch) => {
+    dispatch({
+        type: actionTypes.FETCH_LOGIN_REQUEST_FAILURE,
+        response
+    });
 };

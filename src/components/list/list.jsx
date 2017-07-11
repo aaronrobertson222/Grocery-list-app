@@ -58,7 +58,7 @@ class List extends React.Component {
             const userField = (
               <div styleName="form-group">
                 <label styleName="form-label">Users</label>
-                <FieldArray name="listUsers" component={UserField}/>
+                <FieldArray name="listUsers" component={UserField} required/>
               </div>
             );
 
@@ -71,7 +71,7 @@ class List extends React.Component {
                 </div>
                 <div styleName="form-group">
                   <label styleName="form-label">Items</label>
-                  <FieldArray name="items" component={ItemField} />
+                  <FieldArray name="items" component={ItemField} required />
                 </div>
                 {this.props.currentList.listOwner === this.props.user.id && userField}
                 <div styleName="form-options">
