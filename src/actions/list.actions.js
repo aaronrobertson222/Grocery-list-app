@@ -3,6 +3,16 @@ import fetch from 'httpService';
 import appConfig from '../config/appConfig';
 import history from '../history';
 
+const handleListCreation = (response, dispatch) => {
+
+    history.push(`/app/list/${response.list.id}`);
+
+    dispatch({
+        type: actionTypes.CREATE_LIST_SUCCESS,
+        response
+    });
+};
+
 export function createList(listName, items, listUsers) {
     const promise = fetch(appConfig.NEW_LIST_PATH, {
         method: 'POST',
@@ -47,7 +57,7 @@ export function fetchListById(id) {
     const promise = fetch(`${appConfig.LIST_ID_PATH}${id}`, {
         method: 'POST',
         body: JSON.stringify({
-            id: id
+            id
         })
     });
 
@@ -64,6 +74,16 @@ export function clearCurrentList() {
         type: actionTypes.CLEAR_CURRENT_LIST,
     };
 }
+
+const handleListDelete = (response, dispatch) => {
+
+    history.push('/app');
+
+    dispatch({
+        type: actionTypes.DELETE_LIST_SUCCESS,
+        response
+    });
+};
 
 export function deleteList(id) {
     const promise = fetch(`${appConfig.LIST_ID_PATH}${id}`, {
@@ -82,7 +102,7 @@ export function updateList(id, list) {
     const promise = fetch(`${appConfig.LIST_ID_PATH}${id}`, {
         method: 'PUT',
         body: JSON.stringify({
-            list: list,
+            list,
         }),
     });
 
@@ -93,23 +113,3 @@ export function updateList(id, list) {
         promise,
     };
 }
-
-const handleListDelete = (response, dispatch) => {
-
-    history.push('/app');
-
-    dispatch({
-        type: actionTypes.DELETE_LIST_SUCCESS,
-        response
-    });
-};
-
-const handleListCreation = (response, dispatch) => {
-
-    history.push(`/app/list/${response.list.id}`);
-
-    dispatch({
-        type: actionTypes.CREATE_LIST_SUCCESS,
-        response
-    });
-};

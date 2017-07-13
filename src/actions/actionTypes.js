@@ -22,33 +22,33 @@ export const CREATE_LIST_TRIGGERED = 'CREATE_LIST_TRIGGERED';
 export const CREATE_LIST_SUCCESS = 'CREATE_LIST_SUCCESS';
 export const CREATE_LIST_FAILURE = 'CREATE_LIST_FAILURE';
 
-// fetch users lists
+// Fetch users lists
 export const FETCH_USERS_LISTS_TRIGGERED = 'FETCH_USERS_LISTS_TRIGGERED';
 export const FETCH_USERS_LISTS_SUCCESS = 'FETCH_USERS_LISTS_SUCCESS';
 export const FETCH_USERS_LISTS_FAILURE = 'FETCH_USER_LISTS_FAILURE';
 
-// fetch users shared lists
+// Fetch users shared lists
 export const FETCH_USERS_SHARED_LISTS_TRIGGERED = 'FETCH_USERS_SHARED_LISTS_TRIGGERED';
 export const FETCH_USERS_SHARED_LISTS_SUCCESS = 'FETCH_USERS_SHARED_LISTS_SUCCESS';
 export const FETCH_USERS_SHARED_LISTS_FAILURE = 'FETCH_USERS_SHARED_LISTS_FAILURE';
 
-// fetch list by id
+// Fetch list by id
 export const FETCH_LIST_BY_ID_TRIGGERED = 'FETCH_LIST_BY_ID_TRIGGERED';
 export const FETCH_LIST_BY_ID_SUCCESS = 'FETCH_LIST_BY_ID_SUCCESS';
 export const FETCH_LIST_BY_ID_FAILURE = 'FETCH_LIST_BY_ID_FAILURE';
 
-// clear current list
+// Clear current list
 export const CLEAR_CURRENT_LIST = 'CLEAR_CURRENT_LIST';
 
-// delete project
+// Delete project
 export const DELETE_LIST_TRIGGERED = 'DELETE_LIST_TRIGGERED';
 export const DELETE_LIST_SUCCESS = 'DELETE_LIST_SUCCESS';
 export const DELETE_LIST_FAILURE = 'DELETE_LIST_FAILURE';
 
-// update project
+// Update project
 export const UPDATE_LIST_TRIGGERED = 'UPDATE_LIST_TRIGGERED';
 export const UPDATE_LIST_SUCCESS = 'UPDATE_LIST_SUCCESS';
 export const UPDATE_LIST_FAILURE = 'UPDATE_LIST_FAILURE';
 
-// logout clear user
+// Logout clear user
 export const CLEAR_CURRENT_USER = 'CLEAR_CURRENT_USER';

@@ -19,7 +19,6 @@ import Navbar from 'components/navbar/navbar';
 import NewList from 'components/newList/newList';
 
 class App extends React.Component {
-
     componentWillMount() {
         if (this.props.user === null) {
             this.props.fetchUsersInfo();

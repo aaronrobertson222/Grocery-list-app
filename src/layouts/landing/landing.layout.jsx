@@ -15,7 +15,6 @@ import Login from 'components/login/login';
 import Signup from 'components/signup/signup';
 
 class LandingLayout extends React.Component {
-
     render() {
         if (this.props.user) {
             return (

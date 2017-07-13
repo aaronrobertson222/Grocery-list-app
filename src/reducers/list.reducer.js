@@ -18,17 +18,15 @@ export default function list(state = initialState, action) {
         };
     }
     case actionTypes.FETCH_USERS_LISTS_SUCCESS: {
-        const lists = action.response.lists;
         return {
             ...state,
-            lists,
+            lists: action.response.lists,
         };
     }
     case actionTypes.FETCH_USERS_SHARED_LISTS_SUCCESS: {
-        const sharedLists = action.response.lists;
         return {
             ...state,
-            sharedLists,
+            sharedLists: action.response.lists,
         };
     }
     case actionTypes.FETCH_LIST_BY_ID_SUCCESS: {
@@ -52,6 +50,5 @@ export default function list(state = initialState, action) {
     default: {
         return state;
     }
-
     }
 }

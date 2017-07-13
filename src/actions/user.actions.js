@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
 import fetch from 'httpService';
 import appConfig from '../config/appConfig';
-//import history from '../history';
 
 export function fetchLogin (username, password) {
     const promise = fetch(appConfig.USER_LOGIN_PATH, {
