@@ -7,9 +7,7 @@ import PropTypes from 'prop-types';
 import { fetchLogin, hideModal } from 'actions/index.actions';
 import styles from './login.css';
 
-
 class Login extends React.Component {
-
     formSubmitHandler(values) {
         const username = values.username;
         const password = values.password;
@@ -17,7 +15,6 @@ class Login extends React.Component {
     }
 
     render() {
-        const error = this.props.error;
         return (
             <div styleName="modal-wrapper">
                 <button styleName="close-modal-button" onClick={this.props.hideModal.bind(this)}>&times;</button>
@@ -34,7 +31,7 @@ class Login extends React.Component {
                         <Field name="password" component="input" type="password" placeholder="password" styleName="form-input" required />
                     </div>
                     <button type="submit" styleName="form-submit-button">Login</button>
-                    <p>{error}</p>
+                    {this.props.loginError && <p styleName="form-error">{this.props.loginError}</p>}
                     <p styleName="demo-account-section">Demo Username: DemoUser <br /> Demo Password: Password</p>
                 </form>
             </div>
@@ -47,12 +44,12 @@ Login.propTypes = {
     fetchLogin: PropTypes.func.isRequired,
     hideModal: PropTypes.func.isRequired,
     isVisible: PropTypes.bool.isRequired,
-    error: PropTypes.string
+    loginError: PropTypes.string
 };
 
 const mapStateToProps = state => ({
     isVisible: state.modal.isVisible,
-    error: state.user.error,
+    loginError: state.user.error,
 });
 
 export default connect(mapStateToProps, { fetchLogin, hideModal })(reduxForm({

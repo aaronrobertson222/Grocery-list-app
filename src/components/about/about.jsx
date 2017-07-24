@@ -10,7 +10,9 @@ const About = () => {
           <article styleName="about-section">
             <h1 styleName="about-section-header">One list for everyone.</h1>
             <p styleName="about-section-content">
-              Lorem ipsum dolor sit ame, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Compiling a grocery lists for a family can be tough. Group List aims to make it less of a headache. Group Lists allows users to
+              share and edit one grocery lists with their family, roommate or friends. Users can create lists, add and remove items, choose quantities, and share lists with
+              others for them to edit.
             </p>
           </article>
         </section>

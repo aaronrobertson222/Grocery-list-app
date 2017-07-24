@@ -20,7 +20,7 @@ class Signup extends React.Component {
     render() {
         return(
           <div styleName="form-container">
-              <h1 styleName="form-header">Sign Up</h1>
+              <h1 styleName="form-header">Get Started!</h1>
               <form styleName="form" onSubmit={this.props.handleSubmit(this.formSubmitHandler.bind(this))}>
                 <div styleName="form-group">
                   <label htmlFor="username" styleName="form-input-label">Username</label>
@@ -42,7 +42,8 @@ class Signup extends React.Component {
                   <br />
                   <Field name="lastName" component="input" type="text" placeholder="Last Name" styleName="form-input"/>
                 </div>
-                <button type="submit" styleName="form-submit-button">Signup</button>
+                <button type="submit" styleName="form-submit-button">Sign Up!</button>
+                {this.props.signupError && <p styleName="form-error">{this.props.signupError}</p>}
               </form>
           </div>
         );
@@ -51,10 +52,15 @@ class Signup extends React.Component {
 
 Signup.propTypes = {
     createUser: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
+    signupError: PropTypes.string,
 };
 
+const mapStateToProps = state => ({
+    signupError: state.user.error,
+});
 
-export default connect(null, { createUser })(reduxForm({
+
+export default connect(mapStateToProps, { createUser })(reduxForm({
     form: 'NewUser'
 })(cssModules(Signup, styles, { allowMultiple: true })));

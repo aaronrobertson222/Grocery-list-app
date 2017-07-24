@@ -1,22 +1,24 @@
 /** RESPONSIVE **/
 .user-info {
-  background: #999;
+  background: #4776E6;
   padding: 20% 10%;
 }
 
 .username {
   margin: 0;
   text-align: center;
+  color: #FFF;
 }
 
 .list-section {
   margin: auto;
   text-align: center;
-  width: 90%;
+  width: 95%;
 }
 
 .list-section-header {
   text-align: left;
+  color: #999;
 }
 
 .lists-container {
@@ -26,12 +28,21 @@
 .list {
   display: flex;
   flex-direction: row;
-  background: #e0e0e0;
+  background: #efefef;
   margin-bottom: 10px;
+  -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
+  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
 }
 
 .list-link-item {
   margin-bottom: 10px;
+  text-decoration: none;
+  color: #4776E6;
+}
+
+.list-link-item:hover {
+  text-decoration: underline;
 }
 
 .list-name {
@@ -44,6 +55,20 @@
 .list-name, .list-length {
   display: inline-block;
   width: 50%;
+  font-size: 1.2em;
+}
+
+.section-ruler {
+  border: 0;
+  border-top: 1px solid #efefef;
+  height: 1px;
+}
+
+.user-lists-count {
+  text-align: center;
+  font-size: 1.2em;
+  color: #FFF;
+  margin: 0;
 }
 
 @media only screen and (min-width: 720px) {

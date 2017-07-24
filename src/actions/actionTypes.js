@@ -52,3 +52,6 @@ export const UPDATE_LIST_FAILURE = 'UPDATE_LIST_FAILURE';
 
 // Logout clear user
 export const CLEAR_CURRENT_USER = 'CLEAR_CURRENT_USER';
+
+// Clear current lists
+export const CLEAR_ALL_CURRENT_LISTS = 'CLEAR_ALL_CURRENT_LISTS';

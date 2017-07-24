@@ -1,6 +1,6 @@
 /** RESPONSIVE **/
 .app-sidebar {
-  background: #4776E6;
+  background: #efefef;
   height: 100%;
   width: 100%;
   min-width: 200px;
@@ -29,30 +29,35 @@
 }
 
 .nav-links {
-  color: #FFF;
+  color: #4776E6;
   text-decoration: none;
   font-size: 1.3em;
 }
 
 .nav-links:hover {
-  color: #999;
+  color: #215be6;
 }
 
 .sidebar-button {
   position: absolute;
   width: 50px;
   height: 50px;
-  background: none;
-  border-bottom: 3px solid #4776E6;
-  border-top: 3px solid #4776E6;
-  border-right: 3px solid #4776E6;
+  background: #efefef;
+  border-bottom: 3px solid #efefef;
+  border-top: 3px solid #efefef;
+  border-right: 3px solid #efefef;
   border-left: none;
-  top: 0;
+  top: 50px;
   right: -50px;
 }
 
 .isVisible {
   margin-left: 0;
+}
+
+.button-icon {
+  vertical-align: middle;
+  padding: 0 3px;
 }
 
 /** DESKTOP **/

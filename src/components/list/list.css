@@ -1,12 +1,13 @@
 /** RESPONSIVE **/
 .list-info {
-  background: #999;
+  background: #4776E6;
   padding: 10% 0;
 }
 
 .list-header {
   margin: 0;
   text-align: center;
+  color: #FFF;
 }
 
 .list-edit-button {
@@ -15,7 +16,7 @@
 }
 
 .list-container {
-  width: 90%;
+  width: 95%;
   margin: 20px auto;
 }
 
@@ -29,7 +30,7 @@
 
 .list-item:nth-child(odd) {
   background: rgba(71, 118, 230, .2);
-  border-radius: 3px;
+  border-radius: 1px;
 }
 
 .list-item-name, .list-item-quantity {
@@ -42,7 +43,7 @@
   margin: auto;
   border: none;
   background: none;
-  color: #4776e6;
+  color: #FFF;
 }
 
 .button {
@@ -110,5 +111,16 @@
   vertical-align: middle;
   padding: 0 3px;
 }
+
+.list-section-header {
+  color: #999;
+}
+
+.section-ruler {
+  border: 0;
+  border-top: 1px solid #efefef;
+  height: 1px;
+}
+
 
 /** DEKSTOP **/

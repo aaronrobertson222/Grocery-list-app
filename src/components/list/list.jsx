@@ -52,7 +52,7 @@ class List extends React.Component {
         if (this.props.currentList) {
 
             const deleteButton = (
-              <button styleName="delete-list-button button" type="button" onClick={() => this.props.deleteList(this.props.currentList.id)}><span>Delete List</span><img styleName="button-icon" alt="delete" src={require('images/icons/delete.png')}/></button>
+              <button styleName="delete-list-button button" type="button" onClick={() => this.props.deleteList(this.props.currentList.id)}><span>Delete List</span></button>
             );
 
             const userField = (
@@ -108,8 +108,8 @@ class List extends React.Component {
                           <button styleName="edit-list-button button" type="button" onClick={this.toggleEditing}>Edit List</button>
                         </section>
                         <section styleName="list-container">
-                          <h1>Items</h1>
-                          <hr />
+                          <h1 styleName="list-section-header">Items</h1>
+                          <hr styleName="section-ruler"/>
                           <div>
                             {itemsElements}
                           </div>

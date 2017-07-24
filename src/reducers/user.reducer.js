@@ -25,6 +25,12 @@ export default function user(state = initialState, action) {
             user: action.response.user,
         };
     }
+    case actionTypes.CREATE_USER_REQUEST_FAILURE: {
+        return {
+            ...state,
+            error: action.response.message,
+        };
+    }
     case actionTypes.FETCH_USER_INFO_SUCCESS: {
         return {
             ...state,

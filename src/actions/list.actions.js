@@ -75,6 +75,12 @@ export function clearCurrentList() {
     };
 }
 
+export function clearAllCurrentLists() {
+    return {
+        type: actionTypes.CLEAR_ALL_CURRENT_LISTS,
+    };
+}
+
 const handleListDelete = (response, dispatch) => {
 
     history.push('/app');
