@@ -4,10 +4,18 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 
-import { fetchLogin, hideModal } from 'actions/index.actions';
+import { fetchLogin, hideModal, clearError } from 'actions/index.actions';
 import styles from './login.css';
 
 class Login extends React.Component {
+    componentWillMount() {
+        this.props.clearError();
+    }
+
+    componentWillUnmount() {
+        this.props.clearError();
+    }
+
     formSubmitHandler(values) {
         const username = values.username;
         const password = values.password;
@@ -44,7 +52,8 @@ Login.propTypes = {
     fetchLogin: PropTypes.func.isRequired,
     hideModal: PropTypes.func.isRequired,
     isVisible: PropTypes.bool.isRequired,
-    loginError: PropTypes.string
+    loginError: PropTypes.string,
+    clearError: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -52,6 +61,6 @@ const mapStateToProps = state => ({
     loginError: state.user.error,
 });
 
-export default connect(mapStateToProps, { fetchLogin, hideModal })(reduxForm({
+export default connect(mapStateToProps, { fetchLogin, hideModal, clearError })(reduxForm({
     form: 'UserLogin',
 })(cssModules(Login, styles, { allowMultiple: true })));

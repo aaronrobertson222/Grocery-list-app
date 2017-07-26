@@ -43,6 +43,12 @@ export default function user(state = initialState, action) {
             user: initialState.user,
         };
     }
+    case actionTypes.CLEAR_ERROR: {
+        return {
+            ...state,
+            error: initialState.error,
+        };
+    }
     default: {
         return state;
     }

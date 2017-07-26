@@ -6,6 +6,8 @@
   right: 0;
   background: #FFF;
   z-index: 2;
+  width: 100%;
+  max-width: 100%;
 }
 
 .container {
@@ -13,27 +15,28 @@
   margin: auto;
   position: relative;
   height: 80px;
+  padding: 0 10px;
 }
 
 .navbar-header {
   display: inline-block;
-  position: absolute;
-  left: 0;
   height: 100%;
+}
+
+.navbar-header:hover {
+  cursor: pointer;
 }
 
 .navbar-header > h1 {
     margin: 0;
     line-height: 80px;
+    color: #4776E6;
+    font-size: 2em;
 }
 
 .login-options {
   display: inline-block;
   height: 100%;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-25%);
 }
 
 .login-option {
@@ -51,4 +54,18 @@
   border: 2px solid #4776E6;
   border-radius: 2px;
   color: #4776E6;
+}
+
+@media only screen and (min-width: 720px) {
+  .navbar-header {
+    position: absolute;
+    left: 0;
+  }
+
+  .login-options {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-25%);
+    right: 0;
+  }
 }

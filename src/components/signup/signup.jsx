@@ -4,11 +4,17 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 
-import { createUser } from 'actions/index.actions';
+import { createUser, clearError } from 'actions/index.actions';
 
 import styles from './signup.css';
 
 class Signup extends React.Component {
+    componentWillMount() {
+        this.props.clearError();
+    }
+    componentWillUnmount() {
+        this.props.clearError();
+    }
     formSubmitHandler(values) {
         const username = values.username;
         const password = values.password;
@@ -53,6 +59,7 @@ class Signup extends React.Component {
 Signup.propTypes = {
     createUser: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    clearError: PropTypes.func.isRequired,
     signupError: PropTypes.string,
 };
 
@@ -61,6 +68,6 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, { createUser })(reduxForm({
+export default connect(mapStateToProps, { createUser, clearError })(reduxForm({
     form: 'NewUser'
 })(cssModules(Signup, styles, { allowMultiple: true })));

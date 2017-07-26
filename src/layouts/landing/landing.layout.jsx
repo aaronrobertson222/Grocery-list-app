@@ -3,6 +3,7 @@ import cssModules from 'react-css-modules';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import Scroll from 'react-scroll';
 
 import styles from './landing.layout.css';
 
@@ -16,6 +17,7 @@ import Signup from 'components/signup/signup';
 
 class LandingLayout extends React.Component {
     render() {
+        const Element = Scroll.Element;
         if (this.props.user) {
             return (
               <Redirect to={{
@@ -24,13 +26,15 @@ class LandingLayout extends React.Component {
             );
         }
         return (
-          <div>
+          <div styleName="landing-container">
             <Navbar />
             <div styleName="content">
               {this.props.isVisible && <Login />}
               <Hero />
               <About />
-              <Signup />
+              <Element name="signup-section">
+                <Signup />
+              </Element>
             </div>
           </div>
         );

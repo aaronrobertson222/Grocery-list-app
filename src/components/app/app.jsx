@@ -38,8 +38,8 @@ class App extends React.Component {
                   this.props.user ? (
                   <MainLayout {...props}>
                     <Route exact path="/app" render={(props) => (<Dashboard {...props} />)} />
-                    <Route exact path="/app/newlist" render={(props) => (<NewList {...props} />)} />
-                    <Route exact path="/app/list/:id" render={(props) => (<List {...props} />)} />
+                    <Route path="/app/newlist" render={(props) => (<NewList {...props} />)} />
+                    <Route path="/app/list/:id" render={(props) => (<List {...props} />)} />
                   </MainLayout>
                 ) : (
                   <Redirect to={{

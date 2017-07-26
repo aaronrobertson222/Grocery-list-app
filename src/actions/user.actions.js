@@ -42,7 +42,6 @@ export function fetchLogin (username, password) {
 }
 
 const handleCreateUserResponse = (response, dispatch) => {
-
     if (appConfig.ENV !== 'testing') {
         sessionStorage.removeItem(appConfig.TOKEN_CONTENT_KEY);
         sessionStorage.setItem(appConfig.TOKEN_CONTENT_KEY, response.token);
@@ -96,11 +95,16 @@ export function fetchUsersInfo() {
 }
 
 export function clearCurrentUser() {
-
     sessionStorage.removeItem(appConfig.TOKEN_CONTENT_KEY);
     sessionStorage.removeItem(appConfig.TOKEN_EXP);
 
     return {
         type: actionTypes.CLEAR_CURRENT_USER,
+    };
+}
+
+export function clearError() {
+    return {
+        type: actionTypes.CLEAR_ERROR,
     };
 }
