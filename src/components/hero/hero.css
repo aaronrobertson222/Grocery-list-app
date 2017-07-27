@@ -35,16 +35,15 @@
 @media only screen and (min-width: 737px) {
   .hero-header {
     position: absolute;
-    top: 50px;
+    top: 0px;
     left: 50%;
     transform: translateX(-50%);
   }
 
   .hero-img {
     width: 60%;
-    bottom: -50px;
+    bottom: -80px;
     position: absolute;
-    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
   }

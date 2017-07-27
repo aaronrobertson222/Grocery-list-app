@@ -8,6 +8,15 @@ Group List is an app that allows users to create grocery lists, edit their groce
 ## Screenshots
 
 
+##### Dashboard
+![dashboard image](http://i.imgur.com/hEpgJ9W.png)
+
+##### List Creation
+![create list image](http://i.imgur.com/KOHQosD.png)
+
+##### List
+![list image](http://i.imgur.com/pJnvOq1.png)
+
 ## Technology
 - React
 - React Router

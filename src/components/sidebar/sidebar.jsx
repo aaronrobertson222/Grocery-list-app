@@ -34,7 +34,7 @@ class Sidebar extends React.Component {
         <div styleName={'app-sidebar' + (this.state.sidebarIsVisible ? ' isVisible' : '' )}>
           <header>
             <h1 styleName="sidebar-title">
-              Grocery List App
+              Group List
             </h1>
           </header>
             <nav styleName="sidebar-nav">
