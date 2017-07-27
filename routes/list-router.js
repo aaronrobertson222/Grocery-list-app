@@ -32,7 +32,7 @@ router.post('/',
               .exec()
               .then((count) => {
                   if (count === 0) {
-                      return res.status(404).json({message: 'Invalid List User'});
+                      return res.status(404).json({message: `${listUser} is not a valid user.`});
                   }
               });
           });

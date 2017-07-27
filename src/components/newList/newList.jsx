@@ -37,6 +37,7 @@ class NewList extends React.Component {
                 <label styleName="form-label">Users</label>
                 <FieldArray name="listUsers" component={UserField}  required />
               </div>
+              {this.props.listError && <p styleName="list-error">{this.props.listError}</p>}
               <button styleName="btn" type="submit">Submit List</button>
             </form>
           </div>
@@ -46,11 +47,14 @@ class NewList extends React.Component {
 
 NewList.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
-    createList: PropTypes.func.isRequired
+    createList: PropTypes.func.isRequired,
+    listError: PropTypes.string,
 };
 
+const mapStateToProps = state => ({
+    listError: state.list.listError,
+});
 
-
-export default connect(null, { createList })(reduxForm({
+export default connect(mapStateToProps, { createList })(reduxForm({
     form: 'List',
 })(cssModules(NewList, styles)));

@@ -4,12 +4,18 @@ import appConfig from '../config/appConfig';
 import history from '../history';
 
 const handleListCreation = (response, dispatch) => {
-
     history.push(`/app/list/${response.list.id}`);
 
     dispatch({
         type: actionTypes.CREATE_LIST_SUCCESS,
         response
+    });
+};
+
+const handleListError = (response, dispatch) => {
+    dispatch({
+        type: actionTypes.CREATE_LIST_FAILURE,
+        response,
     });
 };
 
@@ -26,7 +32,7 @@ export function createList(listName, items, listUsers) {
     return {
         onRequest: actionTypes.CREATE_LIST_TRIGGERED,
         onSuccess: handleListCreation,
-        onFailure: actionTypes.CREATE_LIST_FAILURE,
+        onFailure: handleListError,
         promise,
     };
 }

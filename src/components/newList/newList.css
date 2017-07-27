@@ -35,3 +35,7 @@
 .btn:hover {
   cursor: pointer;
 }
+
+.list-error {
+  color: #e74c3c;
+}

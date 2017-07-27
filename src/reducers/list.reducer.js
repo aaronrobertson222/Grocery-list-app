@@ -54,6 +54,12 @@ export default function list(state = initialState, action) {
             lists: initialState.lists,
         };
     }
+    case actionTypes.CREATE_LIST_FAILURE: {
+        return {
+            ...state,
+            listError: action.response.message,
+        };
+    }
     default: {
         return state;
     }
