@@ -6,12 +6,15 @@ import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import styles from './newList.css';
 
-import { createList } from 'actions/index.actions';
+import { createList, clearListError } from 'actions/index.actions';
 
 import ItemField from 'components/itemField/itemField';
 import UserField from 'components/userField/userField';
 
 class NewList extends React.Component {
+    componentWillUnmount() {
+        this.props.clearListError();
+    }
 
     formSubmitHandler(values) {
         const listName = values.listName;
@@ -49,12 +52,13 @@ NewList.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     createList: PropTypes.func.isRequired,
     listError: PropTypes.string,
+    clearListError: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
     listError: state.list.listError,
 });
 
-export default connect(mapStateToProps, { createList })(reduxForm({
+export default connect(mapStateToProps, { createList, clearListError })(reduxForm({
     form: 'List',
 })(cssModules(NewList, styles)));

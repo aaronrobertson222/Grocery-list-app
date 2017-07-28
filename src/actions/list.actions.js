@@ -110,6 +110,13 @@ export function deleteList(id) {
     };
 }
 
+export const handleUpdateListError = (response, dispatch) => {
+    dispatch({
+        type: actionTypes.UPDATE_LIST_FAILURE,
+        response,
+    });
+};
+
 export function updateList(id, list) {
     const promise = fetch(`${appConfig.LIST_ID_PATH}${id}`, {
         method: 'PUT',
@@ -121,7 +128,13 @@ export function updateList(id, list) {
     return {
         onRequest: actionTypes.UPDATE_LIST_TRIGGERED,
         onSuccess: actionTypes.UPDATE_LIST_SUCCESS,
-        onFailure: actionTypes.UPDATE_LIST_FAILURE,
+        onFailure: handleUpdateListError,
         promise,
+    };
+}
+
+export function clearListError() {
+    return {
+        type: actionTypes.CLEAR_LIST_ERROR,
     };
 }

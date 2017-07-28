@@ -56,5 +56,8 @@ export const CLEAR_CURRENT_USER = 'CLEAR_CURRENT_USER';
 // Clear current lists
 export const CLEAR_ALL_CURRENT_LISTS = 'CLEAR_ALL_CURRENT_LISTS';
 
-// Clear form error
-export const CLEAR_ERROR = 'CLEAR_ERROR';
+// Clear user form error
+export const CLEAR_USER_ERROR = 'CLEAR_USER_ERROR';
+
+// Clear list from error
+export const CLEAR_LIST_ERROR = 'CLEAR_LIST_ERROR';

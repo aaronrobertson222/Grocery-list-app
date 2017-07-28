@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
-import { fetchListById, clearCurrentList, deleteList, updateList } from 'actions/index.actions';
+import { fetchListById, clearCurrentList, deleteList, updateList, clearListError } from 'actions/index.actions';
 import styles from './list.css';
 
 import UserField from 'components/userField/userField';
@@ -28,6 +28,7 @@ class List extends React.Component {
 
     componentWillUnmount() {
         this.props.clearCurrentList();
+        this.props.clearListError();
     }
 
     toggleEditing() {
@@ -74,6 +75,7 @@ class List extends React.Component {
                   <FieldArray name="items" component={ItemField} required />
                 </div>
                 {this.props.currentList.listOwner === this.props.user.id && userField}
+                {this.props.listError && <p styleName="list-error">{this.props.listError}</p>}
                 <div styleName="form-options">
                   <button styleName="update-button button" type="submit" onClick={this.props.handleSubmit(this.formSubmitHandler.bind(this))}>Update List</button>
                   <button styleName="cancel-button button" type="button" onClick={this.toggleEditing}>Cancel</button>
@@ -132,14 +134,17 @@ List.propTypes = {
     deleteList: PropTypes.func.isRequired,
     updateList: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    listError: PropTypes.string,
+    clearListError: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
     currentList: state.list.currentList,
     user: state.user.user,
     initialValues: state.list.currentList,
+    listError: state.list.listError,
 });
 
-export default connect(mapStateToProps, { fetchListById, clearCurrentList, deleteList, updateList })(reduxForm({
+export default connect(mapStateToProps, { fetchListById, clearCurrentList, deleteList, updateList, clearListError })(reduxForm({
     form: 'EditList',
 })(cssModules(List, styles, { allowMultiple: true })));

@@ -105,6 +105,6 @@ export function clearCurrentUser() {
 
 export function clearError() {
     return {
-        type: actionTypes.CLEAR_ERROR,
+        type: actionTypes.CLEAR_USER_ERROR,
     };
 }

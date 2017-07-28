@@ -4,6 +4,7 @@ const initialState = {
     lists: [],
     sharedLists: [],
     currentList: null,
+    listError: null,
 };
 
 export default function list(state = initialState, action) {
@@ -58,6 +59,18 @@ export default function list(state = initialState, action) {
         return {
             ...state,
             listError: action.response.message,
+        };
+    }
+    case actionTypes.UPDATE_LIST_FAILURE: {
+        return {
+            ...state,
+            listError: action.response.message,
+        };
+    }
+    case actionTypes.CLEAR_LIST_ERROR: {
+        return {
+            ...state,
+            listError: initialState.listError,
         };
     }
     default: {
