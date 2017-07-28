@@ -9,7 +9,7 @@ const Hero = () => {
       <div styleName="hero-wrapper">
         <div styleName="hero">
           <h1 styleName="hero-header">Grocery lists made simpler.</h1>
-          <img styleName="hero-img" src="http://via.placeholder.com/800x450" />
+          <img styleName="hero-img" src={require('images/Dashboard.png')} />
         </div>
       </div>
     );
