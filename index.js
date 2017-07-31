@@ -53,9 +53,6 @@ app.get('/api', (req, res) => {
 
 app.use('/api/users', userRouter);
 app.use('/api/lists', listRouter);
-app.get('/*', (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 
 app.get('*', (req, res) => {
     res.status(404).send('Whoops something went wrong!');
