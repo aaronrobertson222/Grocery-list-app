@@ -38,6 +38,7 @@ class NewList extends React.Component {
               </div>
               <div styleName="form-group">
                 <label styleName="form-label">Users</label>
+                <p>Add users to the list by username</p>
                 <FieldArray name="listUsers" component={UserField}  required />
               </div>
               {this.props.listError && <p styleName="list-error">{this.props.listError}</p>}
