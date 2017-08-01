@@ -138,6 +138,7 @@ module.exports = {
       reducers: path.join(__dirname, 'src', 'reducers'),
       httpService: httpServicePath,
       images: path.join(__dirname, 'src', 'assets', 'images'),
+      'react-redux': path.join(__dirname, '/node_modules/react-redux/dist/react-redux.min')
     },
     extensions: ['.js', '.jsx', '.css'],
     modules: [
