@@ -30,3 +30,8 @@ Group List is an app that allows users to create grocery lists, edit their groce
 - MongoDB
 - Mongoose
 - JSON Web Tokens
+
+## Future Plans
+
+* Add user search feature.
+* Add email verification to signup.
